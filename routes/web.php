@@ -14,5 +14,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('AdminPanel.adminLayout');
+});
+
+Route::get('/go', function () {
+    return view('index');
+}); 
+Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])
+    ->group(function () {
+        Route::get('/adminLayout', function () {
+            return view('AdminPanel.adminLayout');
+        })->name('adminLayout');
 });
