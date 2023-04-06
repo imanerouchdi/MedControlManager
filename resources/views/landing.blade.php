@@ -27,11 +27,76 @@
                     <li class="nav-item"><a class="nav-link" href="integrations.html">Rendez-vous</a></li>
                     <li class="nav-item"><a class="nav-link" href="#apropos">A propos</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact_nous">Contact-nous</a></li>
-                    <li class="nav-item"><a class="nav-link" href="signup.html">Connexion</a></li>
-                </ul> 
-                @if (Route::has('login'))
-                <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+                    
+                    @if (Route::has('login'))
                     @auth
+
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            {{--  @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())  --}}
+                            
+                            <a class="nav-link dropdown-toggle second-text fw-bold" href="#" id="navbarDropdown"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-user me-2"></i>
+                                @if(Route::has('login'))
+                                
+                                {{--  {{ Auth::user()->name }}   --}}
+                            
+                                
+                                @endif
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                {{--  <x-dropdown align="right" width="48">
+                                    <x-slot name="trigger">
+                                            <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
+                                                <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                                            </button>
+                                        @else
+                                            <span class="inline-flex rounded-md">
+                                                <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
+                                                    {{ Auth::user()->name }}
+            
+                                                    <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                                    </svg>
+                                                </button>
+                                            </span>
+                                        @endif
+                                    </x-slot>  --}}
+                                <li><a class="dropdown-item" href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">Profile </a></li>
+                               
+                                <li>
+                                    <form method="POST" action="{{ route('logout') }}" x-data>
+                                        @csrf
+                                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">Logout</a>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                    @else
+                    
+                    @endauth
+                    <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Connexion</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">enregistrer</a></li>
+
+                    @endif
+                    
+
+
+
+                </ul> 
+                {{--  @if (Route::has('login'))
+                <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+                     @auth
                         <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 underline">Dashboard</a>
                     @else
                         <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Log in</a>
@@ -41,8 +106,8 @@
                         @endif
                     @endauth
                 </div>
-            @endif
-            
+            @endif  --}}
+{{--              
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
                   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,37 +116,33 @@
                   <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav ms-auto">
                       <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          Profile
-                        </a>
+                        @if(Route::has('login'))
+                                
+                        <a class="nav-link dropdown-toggle" href="{{ route('profile.show') }}" id="navbarDropdownMenuLink"  data-bs-toggle="dropdown" aria-expanded="false">
+                         
+                          </a>
+                    
+                        
+                        @endif
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                          <li>
-                            <x-dropdown-link href="{{ route('profile.show') }}">
-                                {{ __('Profile') }}
-                            </x-dropdown-link>
-
-                            {{--  <a class="dropdown-item" href="{{ route('profile.show') }}">My Profile</a>--}}
-                        </li>  
-                          <li>
+                            <li>
+                                <x-dropdown-link href="{{ route('profile.show') }}">
+                                    {{ __('Profile') }}
+                                </x-dropdown-link>
+                            </li>  
+                            <li>
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}" x-data>
                                  @csrf
-
-                                {{--  <x-dropdown-link href="{{ route('logout') }}"
-                                         @click.prevent="$root.submit();">
-                                    {{ __('Log Out') }}
-                                </x-dropdown-link>    --}}
-                            <a class="dropdown-item" href=""{{ route('logout') }}"" onclick="event.preventDefault(); this.closest('form').submit();"
-                            >Logout</a>
-
+                                <a class="dropdown-item" href=""{{ route('logout') }}"" onclick="event.preventDefault(); this.closest('form').submit();">Logout</a>
                             </form>
-                        </li>
+                            </li>
                         </ul>
                       </li>
                     </ul>
                   </div>
                 </div>
-              </nav>
+              </nav>  --}}
               
             </div>
         </div>
@@ -93,7 +154,7 @@
                     <div class="text-center">
                         <h1 class="display-4 fw-bold mb-5">rendez-vous chez votre &nbsp;<span class="underline">médecin</span>!</h1>
                         <p class="fs-5 text-muted mb-5">prenez soin de votre santé !</p>
-                            <div class=" mb-3 "><button class="btn btn-primary w-75 shadow-lg" type="submit" href="{{route('register')}}">enregistrer et prenez votre rendez-vous ! </button></div>
+                            <div class=" mb-3 "><a class="btn btn-primary w-75 shadow-lg" type="submit" href="{{route('register')}}">enregistrer et prenez votre rendez-vous ! </a></div>
                     </div>
                 </div>
             </div>

@@ -18,8 +18,11 @@ return new class extends Migration
             $table->date('dateRdv');
             $table->date('heureRdv');
             $table->string('nomPatient');
-            $table->string('status');
+            $table->string('prenomPatient');
+            $table->string('CIN');
+            
             $table->string('valide');
+            
             $table->timestamps();
         });
     }
