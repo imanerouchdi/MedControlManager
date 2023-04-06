@@ -22,7 +22,7 @@ Route::get('/home',[HomeController::class,'redirect']);
 
 
 Route::get('/go', function () {
-    return view('AdminPanel.adminLayout');
+    return view('datatable');
 });
 Route::get('/rdv', function () {
     return view('rendez-vous');
