@@ -32,6 +32,7 @@ Route::get('/adminLayout',[HomeController ::class, 'index'])->name('adminLayout'
 Route::get('/table',[HomeController ::class, 'table'])->name('table');
 
 
+<<<<<<< HEAD
 // Route::group(['namespace'=>'auth:sanctum'],function(){
 //         Route::get('/login/{type}',[LoginController ::class, 'loginForm'])->name('login.show');
 // Route::get('/typeusers',[homeController ::class, 'store'])->name('typeusers');
@@ -78,6 +79,19 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('users',UserController::class);
     Route::resource('consultation',ConsultationController::class);
     Route::resource('patient',PatientController::class);
+=======
+Route::get('/go', function () {
+    return view('datatable');
+});
+Route::get('/rdv', function () {
+    return view('rendez-vous');
+});
+Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])
+    ->group(function () {
+        Route::get('/adminLayout', function () {
+            return view('AdminPanel.adminLayout');
+        })->name('adminLayout');
+>>>>>>> b887503 (ajouter forme:[patient|datatable])
 });
 // Auth::routes();
 
