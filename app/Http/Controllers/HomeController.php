@@ -9,7 +9,11 @@ class HomeController extends Controller
     public function index(){
         return view('landing');
     }
-    public function dashboard(){
+    public function medecin(){
         return view('AdminPanel.adminLayout');
+    }
+    public function assistant(){
+        return view('AdminPanel.adminLayout');
+
     }
 }

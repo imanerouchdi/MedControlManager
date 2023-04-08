@@ -251,6 +251,11 @@
             </div>  --}}
             <div class="container px-4 py-5">
                 @yield('app')
+                @if(auth()->user()->is_admin == 1)
+                <a href="{{ url('admin/routes') }}">Admin</a>
+            @else
+                <div class="panel-heading">Normal user</div>
+            @endif
             </div>
             
         </div>

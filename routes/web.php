@@ -22,23 +22,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/landing', function () {
-    return view('AdminPanel.adminLayout');
+// Route::get('/landing', function () {
+//     return view('AdminPanel.adminLayout');
+// });
+
+//////////////////////////////////////////////// ------ TYPE USER ------ ////////////////////////////////////////////////
+Route::get('/',[HomeController ::class, 'index'])->name('landing');
+Route::get('/typeusers',[TypeUserController ::class, 'index'])->name('typeusers');
+Route::group(['namespace'=>'auth:sanctum'],function(){
+        Route::get('/login/{type}',[LoginController ::class, 'loginForm'])->name('login.show');
+Route::get('/user',[homeController::class,'index'])->name('user');
+Route::get('/medecin',[homeController::class,'medecin'])->name('dashboard');
+Route::get('/assistant',[homeController::class,'assistant'])->name('assistant');
 });
 
-Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
+Route::middleware(['auth','user-access::user'])->group(function(){
+    Route::get('/landing',[homeController::class,'index'])->name('home');
+});
 
-require_once __DIR__.'/fortify.php';
+Route::middleware(['auth','user-access::medecin'])->group(function(){
+    Route::get('/admin/home',[homeController::class,'medecin'])->name('admin.home');
+});
 
-
-Route::get('/',[App\Http\Controllers\HomeController ::class, 'index'])->name('landing');
-
-Route::get('/typeusers',[App\Http\Controllers\TypeUserController ::class, 'index'])->name('typeusers');
-
-Route::group(['namespace'=>'auth:sanctum'],function(){
-    Route::get('/login/{type}',[App\Http\Controllers\Auth\LoginController ::class, 'loginForm'])->name('login.show');
-
-
+Route::middleware(['auth','user-access::assistant'])->group(function(){
+    Route::get('/assistnt/home',[homeController::class,'assistant'])->name('assistant.home');
 });
 
 
@@ -53,14 +60,10 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])
         })->name('adminLayout');
 });
 
-// Auth::routes();
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-/******************************************* */
+//////////////////////////////////////////////// ------ Patient ------ ////////////////////////////////////////////////
 
-// Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::post('/patient', [PatientController::class,'store'])->name('patient.create');
 Route::get('/patient', [PatientController::class,'index'])->name('patient.index');
   

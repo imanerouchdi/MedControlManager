@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Traits\AuthTrait;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -20,8 +20,8 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers;
-    use authTrait;
+    // use AuthenticatesUsers;
+    use AuthTrait;
 
     /**
      * Where to redirect users after login.
@@ -35,20 +35,45 @@ class LoginController extends Controller
      *
      * @return void
      */
-    // public function __construct()
-    // {
-    //     $this->middleware('guest')->except('logout');
-    // }
+    public function __construct()
+    {
+        $this->middleware('guest')->except('logout');
+    }
     public function loginForm($type){
-        return view ('auth.login.',compact('type'));
+        return view ('auth.login',compact('type'));
     }
     public function login(Request $request){
         
+        // if( Auth::guard($this->chekGuard)->attempt(['email'=>$request->email,'password'=>$request->password]))
+        // {
+        //     $this->redirect($request);
+        // }
         
-        if(Auth::guard($this)->ChekGuard($request)->attempt(['email'=>$request->email,'password'=>$request->password]))
+
+
+
+        //// new auth
+
+        if(auth()->attempt(['email'=>$request->email,'password'=>$request->password]))
         {
-            $this->redirectTo($request);
+            if (auth()->user()->type=='admin') {
+            return redirect()->route('admin.home');
+                
+            }
+            elseif (auth()->user()->type=='assistant') {
+                return redirect()->route('assistant.home');
+                    
+            }
+            else{
+                return redirect()->route('home');
+            }
+        }else{
+            return redirect()->route('login')
+            ->with('error','Email adres and password not correct .');
         }
-        
+
+
+
+
     }
 }
