@@ -93,3 +93,10 @@
     margin-left: -15rem;
   }
 }
+
+.model{
+  position: fixed;
+}
+.modal-backdrop {
+  z-index: -1;
+}

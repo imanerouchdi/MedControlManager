@@ -13,8 +13,9 @@ class Patient extends Model
         "prenomPatient",
         "adressPatient",
         "telefonePatient",
+        "cin",
+        'sexePatient',
         "dateNaissancePatient",
-        
     ];
      
 }

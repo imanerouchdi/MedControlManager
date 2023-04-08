@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string("prenomPatient",30);
             $table->string("adressPatient");
             $table->string("telefonePatient");
+            $table->string("cin")->unique();
             $table->string("sexePatient");
             $table->string("dateNaissancePatient");
           

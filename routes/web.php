@@ -1,6 +1,14 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PatientController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\TypeUserController;
+use App\Http\Controllers\MedecinController;
+use App\Http\Controllers\SimpleUserController;
+use App\Http\Controllers\AssistantController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,22 +22,49 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('AdminPanel.adminLayout');
-// });
-Route::get('/',[HomeController::class,'index']);
-Route::get('/home',[HomeController::class,'redirect']);
+Route::get('/landing', function () {
+    return view('AdminPanel.adminLayout');
+});
+
+Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
+
+require_once __DIR__.'/fortify.php';
 
 
-Route::get('/go', function () {
-    return view('datatable');
+Route::get('/',[App\Http\Controllers\HomeController ::class, 'index'])->name('landing');
+
+Route::get('/typeusers',[App\Http\Controllers\TypeUserController ::class, 'index'])->name('typeusers');
+
+Route::group(['namespace'=>'auth:sanctum'],function(){
+    Route::get('/login/{type}',[App\Http\Controllers\Auth\LoginController ::class, 'loginForm'])->name('login.show');
+
+
 });
-Route::get('/rdv', function () {
-    return view('rendez-vous');
-});
+
+
+
+
+
+
 Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])
     ->group(function () {
         Route::get('/adminLayout', function () {
             return view('AdminPanel.adminLayout');
         })->name('adminLayout');
+});
+
+// Auth::routes();
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+/******************************************* */
+
+// Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::post('/patient', [PatientController::class,'store'])->name('patient.create');
+Route::get('/patient', [PatientController::class,'index'])->name('patient.index');
+  
+Route::group(['middleware' => ['auth']], function() {
+    Route::resource('roles', RoleController::class);
+    Route::resource('users', UserController::class);
 });

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <link rel="stylesheet" href="{{asset('assets/css/styles.css')}}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}" />
     <title>MedControlManager</title>
 </head>
 
@@ -18,31 +18,42 @@
             <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom"><i
                     class="fas fa-user-secret me-2"></i>MedControl</div>
             <div class="list-group list-group-flush my-3">
-          {{--  <button type="submit" class="btn btn-primary">Submit</button>  --}}
-          <div class="d-flex justify-content-center">
-          {{--  <a class="btn btn-primary">Click me</a>  --}}
-            <a href="" class=" btn  btn-primary  second-text active w-75 align-items-center ">+ Ajouter Patient</a>
+                {{--  <button type="submit" class="btn btn-primary">Submit</button>  --}}
+                <div class="d-flex justify-content-center">
+                    {{--  <a class="btn btn-primary">Click me</a>  --}}
+                    <a href="" class=" btn  btn-primary  second-text active w-75 align-items-center ">+ Ajouter
+                        Patient</a>
 
-          </div>
-                    <a href="#" class="list-group-item list-group-item-action bg-transparent second-text active">
+                </div>
+                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text active">
                     <i class="fas fa-tachometer-alt me-2"></i>MedControl</a>
                 <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                     <i class="far fa-calendar-alt me-2"></i>Rendez-vous</a>
-                   
+
                 <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                    <i class="fas fa-chart-line me-2"></i>Analytics</a>
-                {{--  <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                    <i class="fas fa-paperclip me-2"></i>Reports</a>
+                    <i class="fas fa-chart-line me-2"></i>Consultation</a>
+                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                    <i class="fas fa-paperclip me-2"></i>Document Med</a>
                 <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-shopping-cart me-2"></i>Store Mng</a>
+                        class="fas fa-gift me-2"></i>Dossier medicaux</a>
                 <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-gift me-2"></i>Products</a>
+                        class="fas fa-comment-dots me-2"></i>Analytics</a>
                 <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-comment-dots me-2"></i>Chat</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-map-marker-alt me-2"></i>Outlet</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i  
-                        class="fas fa-power-off me-2"></i>Logout</a>--}}
+                        class="fas fa-map-marker-alt me-2"></i>Calendar</a>
+                <div class="dropdown">
+                    <button
+                        class="btn border-0 dropdown-toggle list-group-item list-group-item-action bg-transparent second-text fw-bold"
+                        type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-users-cog me-2"></i> users
+                    </button>
+                    <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="{{url('/' .$page='users')}}">All users</a></li>
+                        <li><a class="dropdown-item" href="{{url('/' .$page='roles')}}">Permissioms</a></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </div>
+                <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
+                        class="fas fa-power-off me-2"></i> Logout</a>
             </div>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -52,31 +63,25 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
-                    
                 </div>
-
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item dropdown">
                             {{--  @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())  --}}
-                            
                             <a class="nav-link dropdown-toggle second-text fw-bold" href="#" id="navbarDropdown"
                                 role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-user me-2"></i>
-                                @if(Route::has('login'))
-                                
-                                {{--  {{ Auth::user()->name }}   --}}
-                            
-                                
-                                @endif
+                                <i class="fas fa-user me-2">
+                                    @yield('nom-user')
+                                </i>
+                               
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                
                                 {{--  <x-dropdown align="right" width="48">
                                     <x-slot name="trigger">
                                             <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
@@ -94,21 +99,22 @@
                                             </span>
                                         @endif
                                     </x-slot>  --}}
-                                <li><a class="dropdown-item" href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">Profile </a></li>
-                               
+                                <li><a class="dropdown-item" href="{{ route('profile.show') }}"
+                                        :active="request() - > routeIs('profile.show')">Profile </a></li>
                                 <li>
                                     <form method="POST" action="{{ route('logout') }}" x-data>
                                         @csrf
-                                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">Logout</a>
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault(); this.closest('form').submit();">Logout</a>
                                     </form>
                                 </li>
-                            </ul>
                         </li>
                     </ul>
                 </div>
             </nav>
 
-            <div class="container-fluid px-4">
+
+            {{--  <div class="container-fluid px-4">
                 <div class="row g-3 my-2">
                     <div class="col-md-3">
                         <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
@@ -242,7 +248,11 @@
                     </div>
                 </div>
 
+            </div>  --}}
+            <div class="container px-4 py-5">
+                @yield('app')
             </div>
+            
         </div>
     </div>
     <!-- /#page-content-wrapper -->
@@ -253,7 +263,7 @@
         var el = document.getElementById("wrapper");
         var toggleButton = document.getElementById("menu-toggle");
 
-        toggleButton.onclick = function () {
+        toggleButton.onclick = function() {
             el.classList.toggle("toggled");
         };
     </script>
