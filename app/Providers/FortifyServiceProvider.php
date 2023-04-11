@@ -28,11 +28,11 @@ class FortifyServiceProvider extends ServiceProvider
     public function register(): void
     {
         //example en metttre les route quand vas igonri like :
-        $this->app->when([MedecinController::class])->needs(StatefulGuard::class)->give(function(){
-            return 
-            Auth::guard('Admin');
+        // $this->app->when([MedecinController::class])->needs(StatefulGuard::class)->give(function(){
+        //     return 
+        //     Auth::guard('Admin');
             
-        });
+        // });
     }
 
     /**

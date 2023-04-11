@@ -14,7 +14,16 @@ return new class extends Migration
     public function up()
     {
         Schema::create('consultations', function (Blueprint $table) {
-            $table->id();
+            $table->idCon();
+            $table->unsignedBigInteger('codePatient')->nullable(false);
+            $table->text('description');
+            $table->text('dateCon');
+            $table->integer('prixCon');
+
+
+
+            $table->foreign('codePatient')->references('codePatient')->on('patients')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

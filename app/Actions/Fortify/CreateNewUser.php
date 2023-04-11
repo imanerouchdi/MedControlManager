@@ -17,19 +17,51 @@ class CreateNewUser implements CreatesNewUsers
      *
      * @param  array<string, string>  $input
      */
-    public function create(array $input): User
-    {
-        Validator::make($input, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => $this->passwordRules(),
-            'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
-        ])->validate();
+    // public function create(array $input): User
+    // {
+    //     Validator::make($input, [
+    //         'name' => ['required', 'string', 'max:255'],
+    //         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+    //         'password' => $this->passwordRules(),
+    //         'role_name' => ['string', 'max:255'],
+    //         'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
+    //     ])->validate();
 
-        return User::create([
-            'name' => $input['name'],
-            'email' => $input['email'],
-            'password' => Hash::make($input['password']),
-        ]);
+    //     return User::create([
+    //         'name' => $input['name'],
+    //         'email' => $input['email'],
+    //         'password' => Hash::make($input['password']),
+    //         'role_name'=>$input['role_name'],
+     
+    //     ]);
+    // }
+
+
+
+
+    public function create(array $input): User
+{
+    Validator::make($input, [
+        'name' => ['required', 'string', 'max:255'],
+        'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        'password' => $this->passwordRules(),
+        'role_name' => ['string', 'max:255'],
+        'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
+    ])->validate();
+
+    $user = new User([
+        'name' => $input['name'],
+        'email' => $input['email'],
+        'password' => Hash::make($input['password']),
+        // $user->role_name = 'user',
+    ]);
+
+    if (isset($input['role_name'])) {
+        $user->role_name = $input['role_name'];
     }
+    
+    $user->save();
+
+    return $user;
+}
 }

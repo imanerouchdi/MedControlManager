@@ -1,6 +1,4 @@
 @extends('layouts.app')
-
-
 @section('content')
 <div class="row">
     <div class="col-lg-12 margin-tb">
@@ -14,21 +12,18 @@
         </div>
     </div>
 </div>
-
-
 @if ($message = Session::get('success'))
     <div class="alert alert-success">
         <p>{{ $message }}</p>
     </div>
 @endif
-
-
 <table class="table table-bordered">
-  <tr>
-     <th>No</th>
-     <th>Name</th>
-     <th width="280px">Action</th>
-  </tr>
+    <tr>
+        <th>No</th>
+        <th>Name</th>
+        <th width="280px">Action</th>
+    </tr>
+    
     @foreach ($roles as $key => $role)
     <tr>
         <td>{{ ++$i }}</td>
@@ -47,10 +42,6 @@
     </tr>
     @endforeach
 </table>
-
-
 {!! $roles->render() !!}
-
-
-<p class="text-center text-primary"><small>Tutorial by ItSolutionStuff.com</small></p>
+<p class="text-center text-primary"><small>Tutorial by LaravelTuts.com</small></p>
 @endsection

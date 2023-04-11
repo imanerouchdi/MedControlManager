@@ -11,7 +11,7 @@
                 {{ session('status') }}
             </div>
         @endif
-        @php
+        {{--  @php
       $type = request('type');
         @endphp
         @if($type=='Assistant')
@@ -23,12 +23,12 @@
 
             @else
             <h2 class="mb-4 fw-bold display-4">Hello  medecin Login please</h2>
-            //new
+            //new  --}}
             
 
         <form method="POST" action="{{ route('login') }}">
             @csrf
-            <input type="text" name="type" value="{{$type}}">
+            {{--  <input type="text" name="type" value="{{$type}}">  --}}
             <div>
                 <x-label for="email" value="{{ __('Email') }}" />
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
@@ -46,7 +46,7 @@
                     <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
                 </label>
             </div>
-            @endif
+            {{--  @endif  --}}
 
             <div class="flex items-center justify-end mt-4">
                 @if (Route::has('password.request'))

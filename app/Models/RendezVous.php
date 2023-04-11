@@ -5,16 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DocumentMedical extends Model
+class RendezVous extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'dateDoc',
-        'codeMed',
-        'codePatient',
-        'contenu'
-
+        'dateRdv',
+        'heureRdv',
+        'nomPatient',
+        'prenomPatient',
+        'CIN',
     ];
-
 }

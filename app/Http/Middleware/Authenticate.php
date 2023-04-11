@@ -14,22 +14,22 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
-        if (!$request->expectsJson()) {
+    //     if (!$request->expectsJson()) {
 
-            if(Request::is('./medecin/landing')){
-                return route('type-users');
-            }
-            elseif(Request::is('./assistant/landing')){
-                return route('type-users');
-            }
-            elseif(Request::is('./user/landing')){
-                return route('type-users');
-            }
-            else{
-                return route('type-users');
+    //         if(Request::is('./medecin/landing')){
+    //             return route('type-users');
+    //         }
+    //         elseif(Request::is('./assistant/landing')){
+    //             return route('type-users');
+    //         }
+    //         elseif(Request::is('./user/landing')){
+    //             return route('type-users');
+    //         }
+    //         else{
+    //             return route('type-users');
 
-            }
-        }
+    //         }
+    //     }
     }
 
     

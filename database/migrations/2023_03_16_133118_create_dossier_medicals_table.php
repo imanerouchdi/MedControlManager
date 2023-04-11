@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('dossier_medicals', function (Blueprint $table) {
             $table->idDossier();
-            $table->unsignedBigInteger('codePatient');
+            $table->unsignedBigInteger('codePatient')->nullable(false);
             $table->text('diagnostic');
             $table->text('traitement');
 

@@ -58,7 +58,7 @@
                             </div>
                         @else
                         @endauth
-                        <li class="nav-item"><a class="nav-link" href="{{ route('typeusers') }}">Connexion</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Connexion</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">enregistrer</a></li>
                     @endif
                 </ul>

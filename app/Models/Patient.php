@@ -17,5 +17,10 @@ class Patient extends Model
         'sexePatient',
         "dateNaissancePatient",
     ];
+
+    public function consultations()
+    {
+        return $this->hasMany(Consultation::class);
+    }
      
 }

@@ -47,8 +47,8 @@
                         <i class="fas fa-users-cog me-2"></i> users
                     </button>
                     <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="{{url('/' .$page='users')}}">All users</a></li>
-                        <li><a class="dropdown-item" href="{{url('/' .$page='roles')}}">Permissioms</a></li>
+                        <li><a class="dropdown-item" href="{{route('users.index')}}">All users</a></li>
+                        <li><a class="dropdown-item" href="{{route('roles.index')}}">Permissioms</a></li>
                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
                 </div>
@@ -69,19 +69,51 @@
                     aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                {{--  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            {{--  @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())  --}}
+                            {{--  <a class="nav-link dropdown-toggle second-text fw-bold" href="#" id="navbarDropdown"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-user me-2">
+                                    
+                                </i>
+                               
+                            </a>  --}}
+                            {{--  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{{ route('profile.show') }}"
+                                        :active="request() - > routeIs('profile.show')">Profile </a></li>
+                                <li>
+                                    <form method="POST" action="{{ route('logout') }}" x-data>
+                                        @csrf
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault(); this.closest('form').submit();">Logout</a>
+                                    </form>
+                                </li>
+                            </ul>  --}}
+
+{{--                              
+                        </li>
+                    </ul>
+                </div>    --}}
+
+
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item dropdown">
                             {{--  @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())  --}}
+                            
                             <a class="nav-link dropdown-toggle second-text fw-bold" href="#" id="navbarDropdown"
                                 role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-user me-2">
-                                    @yield('nom-user')
-                                </i>
-                               
+                                <i class="fas fa-user me-2"></i>
+                                @if(Route::has('login'))
+                                
+                                {{--  {{ Auth::user()->name }}   --}}
+                            
+                                
+                                @endif
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                
                                 {{--  <x-dropdown align="right" width="48">
                                     <x-slot name="trigger">
                                             <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
@@ -99,18 +131,22 @@
                                             </span>
                                         @endif
                                     </x-slot>  --}}
-                                <li><a class="dropdown-item" href="{{ route('profile.show') }}"
-                                        :active="request() - > routeIs('profile.show')">Profile </a></li>
+                                <li><a class="dropdown-item" href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">Profile </a></li>
+                               
                                 <li>
                                     <form method="POST" action="{{ route('logout') }}" x-data>
                                         @csrf
-                                        <a class="dropdown-item" href="{{ route('logout') }}"
-                                            onclick="event.preventDefault(); this.closest('form').submit();">Logout</a>
+                                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">Logout</a>
                                     </form>
                                 </li>
+                            </ul>
                         </li>
                     </ul>
                 </div>
+
+
+
+
             </nav>
 
 
@@ -251,11 +287,11 @@
             </div>  --}}
             <div class="container px-4 py-5">
                 @yield('app')
-                @if(auth()->user()->is_admin == 1)
+                {{--  @if(auth()->user()->is_admin == 1)
                 <a href="{{ url('admin/routes') }}">Admin</a>
             @else
                 <div class="panel-heading">Normal user</div>
-            @endif
+            @endif  --}}
             </div>
             
         </div>
