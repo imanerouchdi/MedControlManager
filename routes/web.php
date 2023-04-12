@@ -4,6 +4,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\TypeUserController;
 use App\Http\Controllers\MedecinController;
 use App\Http\Controllers\SimpleUserController;
@@ -28,6 +29,7 @@ use Illuminate\Support\Facades\Route;
 
 //////////////////////////////////////////////// ------ TYPE USER ------ ////////////////////////////////////////////////
 Route::get('/adminLayout',[HomeController ::class, 'index'])->name('adminLayout');
+Route::get('/table',[HomeController ::class, 'table'])->name('table');
 
 
 // Route::group(['namespace'=>'auth:sanctum'],function(){
@@ -74,6 +76,8 @@ Route::get('/patient',[PatientController::class,'index'])->name('patient.index')
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles',RoleController::class);
     Route::resource('users',UserController::class);
+    Route::resource('consultation',ConsultationController::class);
+    Route::resource('patient',PatientController::class);
 });
 // Auth::routes();
 

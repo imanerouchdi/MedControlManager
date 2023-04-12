@@ -19,4 +19,8 @@ class HomeController extends Controller
     // public function store (){
     //     return view ('type-users');
     // }
+    public function table(){
+        return view('datatable');
+
+    }
 }

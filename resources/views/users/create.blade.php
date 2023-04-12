@@ -53,9 +53,8 @@
         </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary" >Submit</button>
     </div>
 </div>
 {!! Form::close() !!}
-<p class="text-center text-primary"><small>Tutorial by LaravelTuts.com</small></p>
 @endsection

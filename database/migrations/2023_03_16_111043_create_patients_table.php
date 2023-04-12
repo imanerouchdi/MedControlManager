@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string("adressPatient");
             $table->string("telefonePatient");
             $table->string("cin")->unique();
-            $table->string("sexePatient");
+            $table->enum("sexePatient",["Monsieur","Madame","autre"]);
             $table->string("dateNaissancePatient");
           
 

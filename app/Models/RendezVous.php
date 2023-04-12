@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class RendezVous extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'numeroRdv';
 
     protected $fillable = [
         'dateRdv',

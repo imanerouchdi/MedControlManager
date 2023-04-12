@@ -8,9 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Consultation extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'idCon';
 
     protected $fillable = [
         'codePatient',
+        'numeroRdv',
         'description',
         'dateCon',
         'prixCon',

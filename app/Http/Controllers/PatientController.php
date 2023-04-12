@@ -14,21 +14,21 @@ class patientController extends Controller
      */
     function __construct()
     {
-        //  $this->middleware('permission:patient-list|patient-create|patient-edit|patient-delete', ['only' => ['index','show']]);
-        //  $this->middleware('permission:patient-create', ['only' => ['create','store']]);
-        //  $this->middleware('permission:patient-edit', ['only' => ['edit','update']]);
-        //  $this->middleware('permission:patient-delete', ['only' => ['destroy']]);
+         $this->middleware('permission:patient-list|patient-create|patient-edit|patient-delete', ['only' => ['index','show']]);
+         $this->middleware('permission:patient-create', ['only' => ['create','store']]);
+         $this->middleware('permission:patient-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:patient-delete', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data= Patient::all();
-        
-        return view('Patient.show',compact('data'));
+        $patient = Patient::orderBy('CodePatient','DESC')->paginate(5);
+        return view('patient.index',compact('patient'))
+            ->with('i', ($request->input('page', 1) - 1) * 5);
     }
     
     /**
@@ -38,7 +38,9 @@ class patientController extends Controller
      */
     public function create()
     {
-        return view('Patient.create');
+        // $sex = Patient::pluck('sexePatient','sexePatient')->all();
+        return view('patient.create');
+        // ,compact('sex'));
     }
     
     /**
@@ -61,10 +63,12 @@ class patientController extends Controller
         ]);
         
     
-        Patient::create($request->all());
+        $patient=Patient::create($request->all());
+
+        return redirect()->route('patient.index',$patient)
+                        ->with('success','User created successfully');
     
-        return view('AdminPanel.adminLayout')
-                        ->with('success','Patient created successfully.');
+                        // ->with('success','Patient created successfully.');
     }
     
     /**
@@ -73,9 +77,10 @@ class patientController extends Controller
      * @param  \App\Patient  $patient
      * @return \Illuminate\Http\Response
      */
-    public function show(Patient $patient)
+    public function show($codePatient)
     {
-        return view('Patient.show',compact('patients'));
+        $patient=Patient::find($codePatient);
+        return view('patient.show',compact('patient'));
     }
     
     /**
@@ -84,9 +89,9 @@ class patientController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Patient $product)
+    public function edit(Patient $patient)
     {
-        return view('Patient.edit',compact('patient'));
+        return view('patient.edit',compact('patient'));
     }
     
     /**
@@ -96,16 +101,23 @@ class patientController extends Controller
      * @param  \App\Patient  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Patient $product)
+    public function update(Request $request, $patientId)
     {
-         request()->validate([
-            'name' => 'required',
-            'detail' => 'required',
-        ]);
-    
-        $product->update($request->all());
-    
-        return redirect()->route('Patient.index')
+        // dd('test');
+        //  request()->validate([
+        //     'nomPatient' => 'required',
+        //     'prenomPatient' => 'required',
+        //     'adressPatient' => 'required',
+        //     'telefonePatient' => 'required',
+        //     'cin' => 'required'|'unique',
+        //     'sexePatient' => 'required',
+        //     'dateNaissancePatient' => 'required',
+        // ]);
+        
+        $patient = Patient::find($patientId);
+        $patient->update($request->all());
+        
+        return redirect()->route('patient.index')
                         ->with('success','Patient updated successfully');
     }
     
@@ -115,11 +127,11 @@ class patientController extends Controller
      * @param  \App\Patient  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Patient $product)
+    public function destroy(Patient $patient)
     {
-        $product->delete();
+        $patient->delete();
     
-        return redirect()->route('Patient.index')
+        return redirect()->route('patient.index')
                         ->with('success','Product deleted successfully');
     }
 }
