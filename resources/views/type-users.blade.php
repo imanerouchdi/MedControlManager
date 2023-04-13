@@ -14,21 +14,20 @@
         <h1>Welcome to My Page</h1>
       </div>
       <div class="col-12 col-md-4 text-center mb-5">
-        <a href="#" >
-          <img src="/assets/img/user.png" class="w-25" me-3">
+        <a href="{{route('login','user')}}">
+          <img src="/assets/img/user.png" class="w-25 me-3">
           
         </a>
       </div>
       <div class="col-12 col-md-4 text-center mb-5">
-        <a href="#">
-          <img src="/assets/img/female.png" class="w-25" me-3">
+        <a href="{{route('login','assistant')}}">
+          <img src="/assets/img/female.png" class="w-25 me-3">
           
         </a>
       </div>
       <div class="col-12 col-md-4 text-center mb-5">
-        <a href="#">
-          <img src="/assets/img/doctor.png" class="w-25" me-3">
-          User
+        <a href="{{route('login','medecin')}}">
+          <img src="/assets/img/doctor.png" class="w-25 me-3">
         </a>
       </div>
     </div>

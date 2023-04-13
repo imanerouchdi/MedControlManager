@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class DocumentMedical extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'codePatient';
+
+    protected $fillable = [
+        'dateDoc',
+        'codeMed',
+        'codePatient',
+        'contenu'
+
+    ];
+
 }

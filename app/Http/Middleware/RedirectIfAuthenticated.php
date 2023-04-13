@@ -21,11 +21,26 @@ class RedirectIfAuthenticated
     {
         $guards = empty($guards) ? [null] : $guards;
 
-        foreach ($guards as $guard) {
-            if (Auth::guard($guard)->check()) {
+            foreach($guards as $guard){
+                if(Auth::guard($guard)->check()){
                 return redirect(RouteServiceProvider::HOME);
+
+                }
             }
-        }
+
+
+
+
+            // if (Auth::guard('web')->check()) {
+            //     return redirect(RouteServiceProvider::HOME);
+            // }
+            // if (Auth::guard('medecin')->check()) {
+            //     return redirect(RouteServiceProvider::MEDECIN);
+            // }
+            // if (Auth::guard('assistant')->check()) {
+            //     return redirect(RouteServiceProvider::ASSISTANT);
+            // }
+        
 
         return $next($request);
     }

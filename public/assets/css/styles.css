@@ -37,14 +37,14 @@
   );
 }
 
-#sidebar-wrapper {
+/* #sidebar-wrapper {
   min-height: 100vh;
   margin-left: -15rem;
   -webkit-transition: margin 0.25s ease-out;
   -moz-transition: margin 0.25s ease-out;
   -o-transition: margin 0.25s ease-out;
   transition: margin 0.25s ease-out;
-}
+} */
 
 #sidebar-wrapper .sidebar-heading {
   padding: 0.875rem 1.25rem;
@@ -92,4 +92,11 @@
   #wrapper.toggled #sidebar-wrapper {
     margin-left: -15rem;
   }
+}
+
+.model{
+  position: fixed;
+}
+.modal-backdrop {
+  z-index: -1;
 }

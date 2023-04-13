@@ -8,4 +8,20 @@ use Illuminate\Database\Eloquent\Model;
 class Consultation extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'idCon';
+
+    protected $fillable = [
+        'codePatient',
+        'numeroRdv',
+        'description',
+        'dateCon',
+        'prixCon',
+
+    ];
+
+
+    public function patients()
+    {
+        return $this->belongsTo(Patient::class);
+    }
 }

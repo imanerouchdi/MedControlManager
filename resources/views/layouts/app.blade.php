@@ -1,46 +1,69 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-       
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+@extends('AdminPanel.adminLayout')
+@section('app')
+<html lang="{{ app()->getLocale() }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    {{--  <title>{{ config('app.name', ' Configuration users') }}</title>  --}}
 
-        <!-- Styles -->
-        @livewireStyles
-    </head>
-    <body class="font-sans antialiased">
-        <x-banner />
+    {{--  @vite(['resources/js/app.js'])  --}}
 
-        <div class="">
-            @livewire('navigation-menu')
+    <script src="{{ asset('js/app.js') }}" defer></script>
 
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white shadow">
-                    <div class="bg-warning">
-                        {{ $header }}
+   
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <nav class="navbar navbar-expand-md navbar-light navbar-laravel bg-white shadow-sm">
+
+         {{--  <nav class="navbar navbar-expand-md navbar-light bg-white  navbar-laravel shadow-sm">  --}}
+            <div class="container">
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    <H1>Bonjour : {{ Auth::user()->name }}</H1> 
+                    Bienvenu dans l&#39;espace des utilisateur
+                    
+                </a>
+                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>  
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Left Side Of Navbar -->
+                    <ul class="navbar-nav me-auto"></ul>
+
+                    <!-- Right Side Of Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        <!-- Authentication Links -->
+                        @guest
+                            <li><a class="nav-link" href="{{ route('login') }}"></a></li>
+                            <li><a class="nav-link" href="{{ route('register') }}"></a></li>
+                        @else
+                            <li><a class="nav-link" href="{{ route('users.index') }}"></a></li>
+                            <li><a class="nav-link" href="{{ route('roles.index') }}"></a></li>
+                            <li><a class="nav-link" href=""></a></li>
+                            
+                        @endguest
+                    </ul>
                     </div>
-                </header>
-            @endif
-
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
-        </div>
-
-        @stack('modals')
-
-        @livewireScripts
-    </body>
+        
+                </div>
+        </nav>  
+        <main class="py-4">
+            <div class="container">
+                @yield('content')
+                @yield('datatable')
+            </div>
+        </main>
+    </div>
+   
+</body>
 </html>
+@endsection
