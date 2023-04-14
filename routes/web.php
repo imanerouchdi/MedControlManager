@@ -30,7 +30,6 @@ use Illuminate\Support\Facades\Route;
 
 //////////////////////////////////////////////// ------ TYPE USER ------ ////////////////////////////////////////////////
 Route::get('/adminLayout',[HomeController ::class, 'index'])->name('adminLayout');
-Route::get('/table',[HomeController::class, 'table'])->name('table');
 Route::get('/page',[HomeController::class,'page'])->name('page');
 ROUTE::get('/rdv',[RendezVousController::class,'index'])->name('rdv');
 
@@ -85,9 +84,9 @@ Route::group(['middleware' => ['auth']], function() {
 Route::get('/go', function () {
     return view('datatable');
 });
-// Route::get('/rdv', function () {
-//     return view('rendez-vous');
-// });
+Route::get('/APP', function () {
+    return view('RdvPanel.Card-rendez-vous');
+});
 // Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])
 //     ->group(function () {
 //         Route::get('/adminLayout', function () {
@@ -97,3 +96,13 @@ Route::get('/go', function () {
 // Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});

@@ -17,7 +17,7 @@ body {
   box-shadow: 0px 4px 8px 0px #7986CB;
 }
 
-input {
+/* input {
     padding: 10px 20px !important;
     border: 1px solid #24285b !important;
     border-radius: 10px;
@@ -27,7 +27,7 @@ input {
     font-size: 16px;
     letter-spacing: 1px;
     width: 180px;
-}
+} */
 
 input:focus {
     -moz-box-shadow: none !important;
@@ -37,7 +37,7 @@ input:focus {
     outline-width: 0;
 }
 
-::placeholder {
+/* ::placeholder {
     color: #fff;
     opacity: 1;
 }
@@ -48,7 +48,7 @@ input:focus {
 
 ::-ms-input-placeholder {
     color: #fff;
-}
+} */
 
 button:focus {
     -moz-box-shadow: none !important;
@@ -58,7 +58,7 @@ button:focus {
 }
 
 .datepicker {
-  background-color: #7986CB !important;
+  background-color: #bdc4e6 !important;
   color: #fff !important;
   border: none;
   padding: 10px !important;
@@ -134,7 +134,7 @@ thead tr:nth-child(3) th {
   cursor: pointer;
 }
 .icon{
-  color: #512DA8;
+color: #070114;
 }
 /* .card-header{
   background-color:#512DA8;

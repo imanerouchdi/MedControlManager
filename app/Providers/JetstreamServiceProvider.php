@@ -13,7 +13,7 @@ class JetstreamServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        // ignore write route:user/profil
+        //
     }
 
     /**

@@ -4,13 +4,13 @@
     padding:0;
     margin:0;
 }
-/* .container{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background-color:#eee;
-} */
+.container{
+    min-height:100vh !important;
+    display:flex !important;
+    justify-content:center !important;
+    align-items:center !important;
+    /* background-color:#eee !important; */
+}
 .container .card{
     height:500px;
     width:800px;
@@ -84,8 +84,6 @@
 
      
 }
-
-
 .progress-bar li::after{
     content: '';
     position: absolute;
@@ -120,28 +118,6 @@
 .d-none{
    display:none;   
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*left-side-end*/
 .container .card .right-side{
     width:65%;
@@ -353,11 +329,6 @@ select{
     color:blue;
 }
 
-
-
-
-
-
 .checkmark__circle {
   stroke-dasharray: 166;
   stroke-dashoffset: 166;
@@ -406,20 +377,9 @@ select{
     box-shadow: inset 0px 0px 0px 30px #7ac142;
   }
 }
-
-
-
-
-
-
-
-
-
-
 .warning{
     border:1px solid red !important;
 }
-
 
 /*right-side-end*/
 @media (max-width:750px) {

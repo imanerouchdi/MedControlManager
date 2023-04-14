@@ -1,4 +1,3 @@
-
 var next_click=document.querySelectorAll(".next_button");
 var main_form=document.querySelectorAll(".main");
 var step_list = document.querySelectorAll(".progress-bar li");
@@ -7,43 +6,42 @@ let formnumber=0;
 
 next_click.forEach(function(next_click_form){
     next_click_form.addEventListener('click',function(){
-    console.log('gg');
-
         if(!validateform()){
             return false
         }
-       formnumber++;
-       updateform();
-       progress_forward();
-       contentchange();
+    formnumber++;
+    updateform();
+    progress_forward();
+    contentchange();
     });
 }); 
 
 var back_click=document.querySelectorAll(".back_button");
 back_click.forEach(function(back_click_form){
     back_click_form.addEventListener('click',function(){
-       formnumber--;
-       updateform();
-       progress_backward();
-       contentchange();
+    formnumber--;
+    updateform();
+    progress_backward();
+    contentchange();
     });
 });
 
 var username=document.querySelector("#user_name");
 var shownname=document.querySelector(".shown_name");
- 
+
 
 var submit_click=document.querySelectorAll(".submit_button");
 submit_click.forEach(function(submit_click_form){
     submit_click_form.addEventListener('click',function(){
-       shownname.innerHTML= username.value;
-       formnumber++;
-       updateform(); 
+    shownname.innerHTML= username.value;
+    formnumber++;
+    updateform(); 
     });
 });
 
 
- 
+
+
 
 function updateform(){
     main_form.forEach(function(mainform_number){
@@ -51,15 +49,15 @@ function updateform(){
     })
     main_form[formnumber].classList.add('active');
 } 
- 
+
 function progress_forward(){
-    step_list.forEach(list => {
+    // step_list.forEach(list => {
         
-        list.classList.remove('active');
-         
-    }); 
+    //     list.classList.remove('active');
+        
+    // }); 
     
-     
+    
     num.innerHTML = formnumber+1;
     step_list[formnumber].classList.add('active');
 }  
@@ -69,18 +67,18 @@ function progress_backward(){
     step_list[form_num].classList.remove('active');
     num.innerHTML = form_num;
 } 
- 
+
 var step_num_content=document.querySelectorAll(".step-number-content");
 
- function contentchange(){
-     step_num_content.forEach(function(content){
+function contentchange(){
+    step_num_content.forEach(function(content){
         content.classList.remove('active'); 
         content.classList.add('d-none');
-     }); 
-     step_num_content[formnumber].classList.add('active');
- } 
- 
- 
+    }); 
+    step_num_content[formnumber].classList.add('active');
+} 
+
+
 function validateform(){
     validate=true;
     var validate_inputs=document.querySelectorAll(".main.active input");

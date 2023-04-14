@@ -15,6 +15,8 @@ class RendezVousController extends Controller
      */
     public function index()
     {
+        
+
         // set the start time
         $time = Carbon::createFromFormat('H:i', '09:00');
         
@@ -29,7 +31,8 @@ class RendezVousController extends Controller
         
         
         // pass the array of available times to the view
-        return view('heure', ['available_times' => $available_times]);
+        
+        return view('RdvPanel.heure', ['available_times' => $available_times]);
         
 
 

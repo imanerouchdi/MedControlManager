@@ -14,7 +14,7 @@ class HomeController extends Controller
 
     }
     public function page(){
-        return view('Card-Rendez-Vous');
+        return view('RdvPanel.heure');
 
     }
     

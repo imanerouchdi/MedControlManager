@@ -27,7 +27,7 @@
                         Patient</a>
 
                 </div>
-                <a href="{{route('table')}}" class="list-group-item list-group-item-action bg-transparent second-text active">
+                <a href="" class="list-group-item list-group-item-action bg-transparent second-text active">
                     <i class="fas fa-tachometer-alt me-2"></i>MedControl</a>
                     <div class="">
                         <a href="#" class="list-group-item list-group-item-action active" data-bs-toggle="collapse"
