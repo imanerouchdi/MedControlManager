@@ -10,6 +10,7 @@ use App\Http\Controllers\MedecinController;
 use App\Http\Controllers\SimpleUserController;
 use App\Http\Controllers\AssistantController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\RendezVousController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,16 +30,17 @@ use Illuminate\Support\Facades\Route;
 
 //////////////////////////////////////////////// ------ TYPE USER ------ ////////////////////////////////////////////////
 Route::get('/adminLayout',[HomeController ::class, 'index'])->name('adminLayout');
-Route::get('/table',[HomeController ::class, 'table'])->name('table');
+Route::get('/table',[HomeController::class, 'table'])->name('table');
+Route::get('/page',[HomeController::class,'page'])->name('page');
+ROUTE::get('/rdv',[RendezVousController::class,'index'])->name('rdv');
 
 
-<<<<<<< HEAD
 // Route::group(['namespace'=>'auth:sanctum'],function(){
-//         Route::get('/login/{type}',[LoginController ::class, 'loginForm'])->name('login.show');
-// Route::get('/typeusers',[homeController ::class, 'store'])->name('typeusers');
+//          Route::get('/login/{type}',[LoginController ::class, 'loginForm'])->name('login.show');
+//  Route::get('/typeusers',[homeController ::class, 'store'])->name('typeusers');
 
-// Route::get('/user',[homeController::class,'index'])->name('user');
-// Route::get('/medecin',[homeController::class,'medecin'])->name('dashboard');
+//  Route::get('/user',[homeController::class,'index'])->name('user');
+//  Route::get('/medecin',[homeController::class,'medecin'])->name('dashboard');
 // Route::get('/assistant',[homeController::class,'assistant'])->name('assistant');
 // });
 
@@ -79,20 +81,19 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('users',UserController::class);
     Route::resource('consultation',ConsultationController::class);
     Route::resource('patient',PatientController::class);
-=======
+});
 Route::get('/go', function () {
     return view('datatable');
 });
-Route::get('/rdv', function () {
-    return view('rendez-vous');
-});
-Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])
-    ->group(function () {
-        Route::get('/adminLayout', function () {
-            return view('AdminPanel.adminLayout');
-        })->name('adminLayout');
->>>>>>> b887503 (ajouter forme:[patient|datatable])
-});
+// Route::get('/rdv', function () {
+//     return view('rendez-vous');
+// });
+// Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])
+//     ->group(function () {
+//         Route::get('/adminLayout', function () {
+//             return view('AdminPanel.adminLayout');
+//         })->name('adminLayout');
+// });
 // Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

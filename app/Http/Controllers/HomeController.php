@@ -9,18 +9,14 @@ class HomeController extends Controller
     public function index(){
         return view('AdminPanel.adminLayout');
     }
-    // public function medecin(){
-    //     return view('AdminPanel.adminLayout');
-    // }
-    // public function assistant(){
-    //     return view('AdminPanel.adminLayout');
-
-    // }
-    // public function store (){
-    //     return view ('type-users');
-    // }
-    public function table(){
-        return view('datatable');
+    public function home(){
+        return view('landing');
 
     }
+    public function page(){
+        return view('Card-Rendez-Vous');
+
+    }
+    
+
 }
