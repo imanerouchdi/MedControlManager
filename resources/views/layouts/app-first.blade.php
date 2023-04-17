@@ -1,4 +1,5 @@
-
+@extends('AdminPanel.adminLayout')
+@section('app')
 <html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="utf-8">
@@ -64,3 +65,4 @@
 </body>
 </html>
 @endsection
+

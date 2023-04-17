@@ -9,9 +9,12 @@ use App\Http\Controllers\TypeUserController;
 use App\Http\Controllers\MedecinController;
 use App\Http\Controllers\SimpleUserController;
 use App\Http\Controllers\AssistantController;
+use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RendezVousController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\RdvDashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,9 +32,11 @@ use Illuminate\Support\Facades\Route;
 // });
 
 //////////////////////////////////////////////// ------ TYPE USER ------ ////////////////////////////////////////////////
-Route::get('/adminLayout',[HomeController ::class, 'index'])->name('adminLayout');
+Route::get('/adminLayout',[HomeController ::class, 'dashboard'])->name('adminLayout');
 Route::get('/page',[HomeController::class,'page'])->name('page');
-ROUTE::get('/rdv',[RendezVousController::class,'index'])->name('rdv');
+ROUTE::get('/',[RendezVousController::class,'index'])->name('index');
+
+Route::resource('calendar',CalendarController::class);
 
 
 // Route::group(['namespace'=>'auth:sanctum'],function(){
@@ -60,33 +65,40 @@ ROUTE::get('/rdv',[RendezVousController::class,'index'])->name('rdv');
 
 
 
-// Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])
-//     ->group(function () {
-//         Route::get('/adminLayout', function () {
-//             return view('AdminPanel.adminLayout');
-//         })->name('adminLayout');
-// });
+Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])
+    ->group(function () {
+        Route::get('/adminLayout', function () {
+            return view('AdminPanel.adminLayout');
+        })->name('adminLayout');
+});
 
 
 
 //////////////////////////////////////////////// ------ Patient ------ ////////////////////////////////////////////////
 
-Route::post('/patient',[PatientController::class,'store'])->name('patient.create');
-Route::get('/patient',[PatientController::class,'index'])->name('patient.index');
+
 //////////////////////////////////////////////// ------ Patient ------ ////////////////////////////////////////////////
 
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles',RoleController::class);
     Route::resource('users',UserController::class);
     Route::resource('consultation',ConsultationController::class);
+    Route::resource('rendez-vous',RdvDashboardController::class);
     Route::resource('patient',PatientController::class);
+
+    // Route::resource('patient',PatientController::class);
+    // Route::post('/patient',[PatientController::class,'store'])->name('patient.create');
+    // Route::get('/patient',[PatientController::class,'index'])->name('patient.index');
 });
-Route::get('/go', function () {
-    return view('datatable');
-});
-Route::get('/APP', function () {
-    return view('RdvPanel.Card-rendez-vous');
-});
+
+Route::get('/user', [HomeController::class, 'index'])->name('user');
+Route::get('/landing',[LoginController::class, 'redirectodashboard'])->name('landing');
+
+
+
+// Route::get('/APP', function () {
+//     return view('RdvPanel.Card-rendez-vous');
+// });
 // Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])
 //     ->group(function () {
 //         Route::get('/adminLayout', function () {
@@ -106,3 +118,7 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+// Auth::routes();
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

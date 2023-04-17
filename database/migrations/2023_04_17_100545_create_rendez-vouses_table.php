@@ -13,17 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('rendez_vs', function (Blueprint $table) {
+        Schema::create('rendez-vouses', function (Blueprint $table) {
             $table->numeroRdv();
-            $table->foreignId('user_id')->nullable();
+            $table->string("nom")->nullable();
+            $table->string("prenom")->nullable();
+            $table->string("cin",8)->format('DA')->unique();
             $table->date('dateRdv');
             $table->date('heureRdv');
-            $table->string('codePatient');
-            $table->string('nomPatient');
-            $table->string('prenomPatient');
-            $table->string('CIN');
-            
-            $table->string('valide');
+
 
             $table->timestamps();
         });
@@ -36,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rendez_vs');
+        Schema::dropIfExists('rendez-vouses');
     }
 };

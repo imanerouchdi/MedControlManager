@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app-first')
 @section('content')
 <div class="row">
     <div class="col-lg-12 margin-tb">
@@ -46,5 +46,4 @@
 @endforeach
 </table>
 {!! $data->render() !!}
-<p class="text-center text-primary"><small>Tutorial by LaravelTuts.com</small></p>
 @endsection

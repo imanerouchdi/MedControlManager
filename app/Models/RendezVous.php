@@ -8,13 +8,21 @@ use Illuminate\Database\Eloquent\Model;
 class RendezVous extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'numeroRdv';
+    protected $primaryKey = ['numeroRdv','codePatient'];
 
     protected $fillable = [
         'dateRdv',
         'heureRdv',
+        'codePatient',
+        'cin',
         'nomPatient',
-        'prenomPatient',
-        'CIN',
+        'prenomPatient'
+
+
+        
     ];
+    public function patients()
+    {
+        return $this->belongsTo(Patient::class);
+    }
 }

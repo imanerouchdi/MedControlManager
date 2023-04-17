@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app-first')
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
@@ -6,7 +6,7 @@
                 <h2>Patient Management</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-success mb-4" href="{{ route('patient.create') }}"> Create New Patien</a>
+                <a class="btn btn-success mb-4" href="{{route('patient.create') }}"> Nouveaux Patien</a>
             </div>
         </div>
     </div>

@@ -19,11 +19,15 @@ return new class extends Migration
             $table->string("prenomPatient",30);
             $table->string("adressPatient");
             $table->string("telefonePatient");
-            $table->string("cin")->unique();
             $table->enum("sexePatient",["Monsieur","Madame","autre"]);
             $table->string("dateNaissancePatient");
-          
+	        $table->string("cin",8)->format('DA')->unique();
+            
 
+          
+            // $table->unsignedBigInteger("user_id")->nullable()->change();
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+           
             $table->timestamps();
         });
     }

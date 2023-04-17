@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -6,31 +8,29 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" href="{{ asset('assets\css\rdvstyle.css') }}">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        //
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ asset('assets\css\HoureStyle.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets\css\HoureStyle.css') }}">
     </head>
 <body>
     
     <div class="container mt-5">
-    <div class="card">
+    <div class="card" style='height: 550px '>
         <div class="form">
             <div class="left-side">
                 <div class="left-heading">
-                    <h3>indeed</h3>
+                    <h4>Prendre rendez-vous</h4>
                 </div>
                 <div class="steps-content">
-                    <h3>Step <span class="step-number">1</span></h3>
-                    <p class="step-number-content active">Enter your personal information to get closer to companies.</p>
-                    <p class="step-number-content d-none">Get to know better by adding your diploma,certificate and education life.</p>
-                    <p class="step-number-content d-none">Help companies get to know you better by telling then about your past experiences.</p>
-                    <p class="step-number-content d-none">Add your profile piccture and let companies find youy fast.</p>
+                    <h3>Etape <span class="step-number"> 1</span></h3>
+                    <p class="step-number-content active">Entrez vos renseignements personnels</p>
+                    <p class="step-number-content d-none">Choisir un Rendez vous.</p>
+                    <p class="step-number-content d-none">Terminer.</p>
                 </div>
-                <ul class="progress-bar">
-                    <li class="active">Personal Information</li>
-                    <li>Education</li>
+                <ul class="progress-bars ">
+                    <li class="active">Information Personnelle</li>
+                    <li>Information </li>
                     
-                    <li>User Photo</li>
+                    <li>Date et l&nbsp;heure du rendez vous</li>
                 </ul>
             </div>
             <div class="right-side">
@@ -83,39 +83,38 @@
                     </div>
                 </div>
                 <div class="main">
-                    <h1>jjjj</h1>
-                    <div class="container-fluid px-0 px-sm-4 mx-auto">
-                        <div class="row justify-content-center mx-0">
-                          <div class="col col-md-4">
-                            <div class="card">
-                              <div class="card-header">
-                                <h5 class="card-title">Dr. Rouchdi Imane</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">Specialte: Cardiologie</h6>
-                                <p class="card-text">19 Fath , EL Hay Mohamadi, Youssoufia</p>
+                    {{--  <div class="">  --}}
+                        {{--  <div class="row justify-content-center mx-0">  --}}
+                          {{--  <div class="col col-md-4">  --}}
+                            {{--  <div class="card">  --}}
+                              <div class="">
+                                <h5 class="mt-4">Dr. Rouchdi Imane</h5>
+                                <h6 class=" mb-2 text-muted">Specialte: Cardiologie</h6>
+                                <p class=>19 Fath , EL Hay Mohamadi, Youssoufia</p>
                               </div>
-                              <div class="card border-0">
+                              <div class="">
                                 <form autocomplete="off">
-                                  <div class="card-body  ">
-                                    <div class="mx-0 mb-0 row justify-content-space d-flex px-1">
+                                  <div class=" mt-3 ">
+                                    <div class=" row justify-content-space d-flex flex-row  px-1">
                                       <span class="font-weight-normal  px-3 mt-2">Veuillez choisir la date du rendez-vous</span>
                                       <input type="date" name="date" class=" shadow-sm" >
                                     </div>
                                     <div class="row text-center mx-0">
-                                        <div class="row">
-                                          {{--  @foreach ($available_times as $time)   --}}
-                                            <div class="col-md-3">
-                                              {{--  <button type="button" class="btn 3 border rounded-1 mt-1 mb-1 bg-light " >{{$time}}</button>  --}}
+                                        <div class="row mt-3">
+                                          @foreach ($available_times as $time=>$t) 
+                                            <div class="col-sm-3">
+                                                <button type="button"  id ="btn_hours" class="btn btn-primary mt-2 border rounded-1 bg-light fw-bold " >{{$t}}</button>  
                                             </div>
-                                            {{--  @endforeach   --}}
+                                            @endforeach 
                                              {{--  w-100  --}}
                                         </div>
                                     </div>
-                                  </div>
+                                  {{--  </div>  --}}
                                 </form>                    
-                    <div class="buttons button_space">
-                        <button class="back_button">Back</button>
-                        <button class="next_button">Next Step</button>
-                    </div>
+                            <div class="buttons button_space">
+                                <button class="back_button">Back</button>
+                                <button class="next_button">Next Step</button>
+                            </div>
                 </div>
                 <div class="main">
                      <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
@@ -134,7 +133,7 @@
 </div>
 <script src="{{ asset('assets\js\rdv.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-//
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>  
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.js"></script>
 <script src="{{ asset('assets\js\HoureJs.js') }}"></script>  

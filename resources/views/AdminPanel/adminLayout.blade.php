@@ -45,8 +45,8 @@
                         data-bs-target="#submenu1"><i class="far fa-calendar-alt me-2"></i>Rendez-vous
                         <i class="fa fa-caret-down float-end"></i></a>
                     <div class="collapse" id="submenu1">
-                        <a href="#" class="list-group-item list-group-item-action">Item 1</a>
-                        <a href="#" class="list-group-item list-group-item-action">Item 2</a>
+                        <a href="#" class="list-group-item list-group-item-action">All Rendez-vous</a>
+                        <a href="{{route('rendez-vous.index')}}" class="list-group-item list-group-item-action">ajouter Rcd</a>
                     </div>
                 </div>
                 <div class="">

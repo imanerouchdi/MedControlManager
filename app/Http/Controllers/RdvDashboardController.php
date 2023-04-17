@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\RendezVous;
-use Carbon\Carbon;
 
-class RendezVousController extends Controller
+use Illuminate\Http\Request;
+
+class RdvDashboardController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,31 +15,7 @@ class RendezVousController extends Controller
      */
     public function index()
     {
-        
-
-        // set the start time
-        $time = Carbon::createFromFormat('H:i', '09:00');
-        
-        // create an array to hold the available times
-        $available_times = [];
-        
-        // loop through 12 times to get the time every 30 minutes for 6 hours
-        for ($i = 0; $i <17; $i++) {
-            $available_times[] = $time->format('H:i');
-            $time->addMinutes(30);
-        }
-        
-        
-        // pass the array of available times to the view
-        
-        return view('RdvPanel.Card-rendez-vous', ['available_times' => $available_times]);
-        
-
-
-
-
-
-        // return view ('rendez-vous' ,compact('heur'));
+        return view('RdvPanel.calendar');
     }
 
     /**
@@ -60,7 +36,17 @@ class RendezVousController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        request()->validate([
+            'nompatient'=>'|string',
+            'prenomPatient'=>'|string',
+            'cin'=>'|string',
+            'dateRdv',
+            'dateRdv'
+        ]);
+            $rdv_d=RendezVous::create($request->all());
+
+        return redirect()->route('rendez_vs.index',$rdv_d)
+                        ->with('success','User created successfully');
     }
 
     /**

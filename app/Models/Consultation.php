@@ -15,13 +15,15 @@ class Consultation extends Model
         'numeroRdv',
         'description',
         'dateCon',
-        'prixCon',
+        'prccdsixCon',
 
     ];
-
-
     public function patients()
     {
         return $this->belongsTo(Patient::class);
+    }
+    public function rendezvous()
+    {
+        return $this->belongsTo(RendezVous::class);
     }
 }
