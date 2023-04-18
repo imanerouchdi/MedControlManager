@@ -15,19 +15,17 @@
 <body>
     <div class="d-flex" id="wrapper">
         <!-- Sidebar -->
-        <div class="bg-white" id="sidebar-wrapper">
-            <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom"><i
-                    class="fas fa-user-secret me-2"></i>MedControl</div>
+        <div class="sideBar" id="sidebar-wrapper">
+            <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom">
+                <i class="fas fa-clinic-medical me-2"></i>MedControl</div>
             <div class="list-group list-group-flush my-3">
-                {{--  <button type="submit" class="btn btn-primary">Submit</button>  --}}
                 <div class="d-flex justify-content-center">
-                    {{--  <a class="btn btn-primary">Click me</a>  --}}
-                    <a href="{{route('patient.create') }}"
+                    {{--  <a href="{{route('patient.create') }}"
                         class=" btn  btn-primary  second-text active w-75 align-items-center ">+ Ajouter
-                        Patient</a>
+                        Patient</a>  --}}
 
                 </div>
-                <a href="" class="list-group-item list-group-item-action bg-transparent second-text active">
+                <a href="{{route('adminLayout')}}" class="list-group-item list-group-item-action bg-transparent second-text active">
                     <i class="fas fa-tachometer-alt me-2"></i>MedControl</a>
                     <div class="">
                         <a href="#" class="list-group-item list-group-item-action active" data-bs-toggle="collapse"
@@ -35,18 +33,18 @@
                             <i class="fas fa-chart-line me-2"></i>Patient
                             <i class="fa fa-caret-down float-end"></i></a>
                         <div class="collapse" id="patient">
-                            <a href="{{route('patient.index')}}" class="list-group-item list-group-item-action">All Patient</a>
-                            <a href="{{route('patient.create') }}" class="list-group-item list-group-item-action">Ajouter patient</a>
+                            <a href="{{route('patient.index')}}" class="list-group-item list-group-item-action listPatient"><i class="fas fa-hospital-user me-2"></i>All Patient</a>
+                            <a href="{{route('patient.create') }}" class="list-group-item list-group-item-action listPatient"><i class="fas fa-user-injured me-2"></i>Ajouter patient</a>
                         </div>
                     </div>
 
                 <div class="">
                     <a href="#" class="list-group-item list-group-item-action active" data-bs-toggle="collapse"
-                        data-bs-target="#submenu1"><i class="far fa-calendar-alt me-2"></i>Rendez-vous
+                        data-bs-target="#submenu1"><i class="far fa-calendar-alt me-2"></i>Appointment
                         <i class="fa fa-caret-down float-end"></i></a>
                     <div class="collapse" id="submenu1">
-                        <a href="#" class="list-group-item list-group-item-action">All Rendez-vous</a>
-                        <a href="{{route('rendez-vous.index')}}" class="list-group-item list-group-item-action">ajouter Rcd</a>
+                        <a href="{{route('appointment.index')}}" class="list-group-item list-group-item-action">All Appointment</a>
+                        <a href="{{route('appointment.create')}}" class="list-group-item list-group-item-action">ajouter Appointment</a>
                     </div>
                 </div>
                 <div class="">
@@ -102,7 +100,7 @@
         <!-- /#sidebar-wrapper -->
     <!-- Page Content -->
         <div id="page-content-wrapper">
-            <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
+            <nav class="navbar navbar-expand-lg navbar-light  py-4 px-4">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
                 </div>

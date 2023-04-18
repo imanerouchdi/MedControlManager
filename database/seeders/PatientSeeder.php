@@ -51,6 +51,7 @@ class PatientSeeder extends Seeder
                 'cin' => $patient['cin'],
                 'sexePatient' => $patient['sexePatient'],
                 'dateNaissancePatient' => $patient['dateNaissancePatient'],
+                
             ]);
         }
     }

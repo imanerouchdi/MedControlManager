@@ -5,21 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RendezVous extends Model
+class appointment extends Model
 {
     use HasFactory;
-    protected $primaryKey = ['numeroRdv','codePatient'];
+    // protected $primaryKey = ['numeroRdv','codePatient'];
 
     protected $fillable = [
         'dateRdv',
         'heureRdv',
-        'codePatient',
+        'patient_id',
         'cin',
-        'nomPatient',
-        'prenomPatient'
-
-
-        
+        'nom',
+        'prenom',
+        // 'numeroRdv',
     ];
     public function patients()
     {

@@ -16,17 +16,17 @@
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    {{--  <link href="{{ asset('css/app.css') }}" rel="stylesheet">  --}}
 </head>
 <body>
     <div id="app">
         <div class="bg-black">
            <H1>Bonjour : {{ Auth::user()->name }}</H1> 
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+        {{--  <nav class="navbar navbar-expand-md navbar-light navbar-laravel">  --}}
             <div class="container">
-                <h3 class="navbar-brand fs-2 " href="{{ url('/') }}">
+                {{--  <h3 class="navbar-brand fs-2 " href="{{ url('/') }}">
                     Bienvenu dans l&#39;espace des utilisateur
-                </h3>
+                </h3>  --}}
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -51,7 +51,7 @@
                     </ul>
                 </div>
             </div>
-        </nav>
+        {{--  </nav>  --}}
 
 
         <main class="py-4">

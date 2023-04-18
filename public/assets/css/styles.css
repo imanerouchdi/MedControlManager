@@ -1,8 +1,8 @@
 :root {
-  --main-bg-color: #d6e8f8;
+  /* --main-bg-color: #d6e8f8;
   --main-text-color: #0077be;
   --second-text-color: #0077be;
-  --second-bg-color: #d6e8f8;
+  --second-bg-color: #d6e8f8; */
 }
 
 .primary-text {
@@ -27,27 +27,20 @@
 
 #wrapper {
   overflow-x: hidden;
-  background-image: linear-gradient(
-    to right,
-    #0077be,
-    #6098d4,
-    #a3c4f3,
-    #d6e8f8,
-    #f0f7fc
-  );
+  background-color:#F9F5EB !important;
 }
 
-/* #sidebar-wrapper {
+#sidebar-wrapper {
   min-height: 100vh;
   margin-left: -15rem;
   -webkit-transition: margin 0.25s ease-out;
   -moz-transition: margin 0.25s ease-out;
   -o-transition: margin 0.25s ease-out;
   transition: margin 0.25s ease-out;
-} */
+}
 
 #sidebar-wrapper .sidebar-heading {
-  padding: 0.875rem 1.25rem;
+  /* padding: 0.875rem 1.25rem; */
   font-size: 1.2rem;
 }
 
@@ -99,4 +92,58 @@
 }
 .modal-backdrop {
   z-index: -1;
+}
+.navbar{
+  background-color:#E4DCCF !important;
+}
+.sideBar{
+  background-color:#002B5B;
+  color:#F9F5EB;
+}
+.list-group-item{
+  background-color:#002B5B !important;
+  color:#F9F5EB !important;
+}
+.list-group-item:hover{
+  background-color:#F9F5EB !important;
+  color:#002B5B !important;
+}
+.listPatient{
+  padding: 13px 42px !important;
+}
+.list-group-item.active {
+border-start-start-radius:5px !important;
+border-end-end-radius: 55px !important;
+}
+.h2 {
+  background-color: #002B5B !important;
+  border-top-left-radius: 25px !important; 
+  border-top-right-radius: 25px !important; 
+  padding: 20px !important; 
+  color: #F9F5EB !important;
+}
+.tr-style{
+  background-color: #002B5B !important;
+  border-top-left-radius: 25px !important; 
+  border-top-right-radius: 25px !important; 
+  padding: 20px !important; 
+  color: #F9F5EB !important;
+
+}
+tbody, td, tfoot, th, thead, tr{
+border-top-style: none!important;
+border-right-style: solid;
+border-bottom-style: solid !important;
+border-left-style:  solid;
+}
+.thBorderleft{
+  border-top-left-radius: 40px !important;
+border-left-style: none !important;
+
+}
+.thBorderright{
+  border-top-right-radius: 40px !important;
+border-right-style: none !important;
+
+
 }

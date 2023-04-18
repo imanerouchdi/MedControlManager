@@ -83,7 +83,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles',RoleController::class);
     Route::resource('users',UserController::class);
     Route::resource('consultation',ConsultationController::class);
-    Route::resource('rendez-vous',RdvDashboardController::class);
+    Route::resource('appointment',RdvDashboardController::class);
     Route::resource('patient',PatientController::class);
 
     // Route::resource('patient',PatientController::class);

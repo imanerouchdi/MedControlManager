@@ -26,7 +26,7 @@ class patientController extends Controller
      */
     public function index(Request $request)
     {
-        $patient = Patient::orderBy('CodePatient','DESC')->paginate(5);
+        $patient = Patient::orderBy('id','DESC')->paginate(5);
         return view('patient.index',compact('patient'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
@@ -77,9 +77,9 @@ class patientController extends Controller
      * @param  \App\Patient  $patient
      * @return \Illuminate\Http\Response
      */
-    public function show($codePatient)
+    public function show($id)
     {
-        $patient=Patient::find($codePatient);
+        $patient=Patient::find($id);
         return view('patient.show',compact('patient'));
     }
     

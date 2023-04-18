@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Patient extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'codePatient';
+    // protected $primaryKey = ['codePatient','user_id'];
     protected $fillable = [
        
         "nomPatient",
@@ -18,15 +18,19 @@ class Patient extends Model
         "cin",
         'sexePatient',
         "dateNaissancePatient",
+        'numeroRdv'
     ];
 
-    public function consultations()
-    {
-        return $this->hasMany(Consultation::class);
-    }
-    public function user()
-    {
-        return this->belongsTo(user::class); 
+    // public function consultations()
+    // {
+    //     return $this->hasMany(Consultation::class);
+    // }
+    // public function user()
+    // {
+    //     return this->belongsTo(user::class); 
+    // }
+    public function appointment(){
+        return $this->hasMany(Appointment::class);
     }
      
 }

@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\RendezVous;
+use App\Models\Appointment;
+use App\Models\Patient;
 
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class RdvDashboardController extends Controller
      */
     public function index()
     {
-        return view('RdvPanel.calendar');
+        return view('RdvPanel.allAppointment');
     }
 
     /**
@@ -25,7 +26,7 @@ class RdvDashboardController extends Controller
      */
     public function create()
     {
-        //
+        return view('RdvPanel.calendar');
     }
 
     /**
@@ -34,19 +35,34 @@ class RdvDashboardController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request )
     {
-        request()->validate([
-            'nompatient'=>'|string',
-            'prenomPatient'=>'|string',
-            'cin'=>'|string',
-            'dateRdv',
-            'dateRdv'
+        $patient = Patient::create([
+            'nomPatient' => $request->input('nom'),
+            'prenomPatient' => $request->input('prenom'),
+            'cin' => $request->input('cin'),
         ]);
-            $rdv_d=RendezVous::create($request->all());
+        $patientLast= Patient::orderBy('created_at','DESC')->first();
+        
 
-        return redirect()->route('rendez_vs.index',$rdv_d)
-                        ->with('success','User created successfully');
+        $appointment = Appointment::create([
+            'patient_id' => $patientLast->id,
+            'dateRdv' => $request->input('dateRdv'),
+            'heureRdv' => $request->input('heureRdv'),
+            'nom' => $request->input('nom'),
+            'prenom' => $request->input('prenom'),
+            'cin' => $request->input('cin'),
+
+        ]);
+    
+        // Redirect to a success page or a page that displays the newly created data.
+    
+        // $patient ;
+        // $appointment =appointment::create($request->all());
+            
+        // dd($appointment) ;
+        return redirect()->route('appointment.index',$appointment)
+                        ->with('success','Rdv created successfully');
     }
 
     /**

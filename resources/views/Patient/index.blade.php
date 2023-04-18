@@ -2,11 +2,11 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Patient Management</h2>
+            <div class="pull-left mb-5">
+                <h2 class="h2">Patient Management</h2>
             </div>
-            <div class="pull-right">
-                <a class="btn btn-success mb-4" href="{{route('patient.create') }}"> Nouveaux Patien</a>
+            <div class="pull-right mt-5">
+                {{--  <a class="btn btn-success mb-4" href="{{route('patient.create') }}"> Nouveaux Patien</a>  --}}
             </div>
         </div>
     </div>
@@ -16,8 +16,8 @@
         </div>
     @endif
     <table class="table table-bordered">
-        <tr>
-            <th>Code Patient</th>
+        <tr class="tr-style">
+            <th class="thBorderleft">Code Patient</th>
             <th>Nom</th>
             <th>Prenon</th>
             <th>Adress</th>
@@ -25,7 +25,7 @@
             <th>CIN</th>
             <th>Genre</th>
             <th>Date de Naissance</th>
-            <th width="280px">Action</th>
+            <th width="280px" class="thBorderright">Action</th>
         </tr>
         @foreach ($patient as $key => $item)
             <tr>
@@ -38,10 +38,10 @@
                 <td>{{ $item->sexePatient }}</td>
                 <td>{{ $item->dateNaissancePatient }}</td>
                 <td>
-                    <form action="{{ route('patient.destroy', $item->codePatient) }}" method="POST">
-                        <a class="btn btn-info" href="{{ route('patient.show', $item->codePatient) }}">Show</a>
+                    <form action="{{ route('patient.destroy', $item->id) }}" method="POST">
+                        <a class="btn btn-info" href="{{ route('patient.show', $item->id) }}">Show</a>
                         @can('patient-edit')
-                            <a class="btn btn-primary" href="{{ route('patient.edit', $item->codePatient) }}">Edit</a>
+                            <a class="btn btn-primary" href="{{ route('patient.edit', $item->id) }}">Edit</a>
                         @endcan
                         @csrf
                         @method('DELETE')

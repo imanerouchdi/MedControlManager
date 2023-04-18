@@ -15,44 +15,44 @@
     </head>
 <body>
     
-      <div class="container calendar-container">
-        <div class="row mt-5">
-          <div class="col-md-8 ">
-            <form class="shadow p-3 mb-5 bg-body rounded" method="Post" action="{{route('rendez-vous.store')}}">
-                @csrf
-                <h1 class="text-center mb-3 text-secondary">Ajouter</h1>
-                <div class="row mb-3">
-                    <label for="nom" class="col-sm-2 col-form-label">Nom :</label>
-                    <div class="col-sm-3">
-                        <input type="text" class="form-control shadow-sm" id="nom" name="nomPatient" >
+      <div class="calendar-container">
+        <div class="row  ">
+            <div class="w-50 m-auto ">
+                <form class="shadow p-3 mb-5 bg-body rounded" method="Post" action="{{route('appointment.store')}}">
+                    @csrf
+                    <h1 class="text-center mb-3 text-secondary">Ajouter</h1>
+                    <div class="row mb-3">
+                        <label for="nom" class="col-sm-2 col-form-label">Nom :</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control shadow-sm" id="nom" name="nom" >
+                        </div>
+                        <label for="prenom" class="col-sm-2 col-form-label">Prénom :</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control shadow-sm" id="prenom" name="prenom" >
+                        </div>
                     </div>
-                    <label for="prenom" class="col-sm-2 col-form-label">Prénom :</label>
-                    <div class="col-sm-3">
-                        <input type="text" class="form-control shadow-sm" id="prenom" name="prenomPatient" >
+                    <div class="row mb-3">
+                        <label for="adress" class="col-sm-2 col-form-label">cin :</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control shadow-sm" id="cin" name="cin" >
+                        </div>
                     </div>
-                </div>
-                <div class="row mb-3">
-                    <label for="adress" class="col-sm-2 col-form-label">cin :</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control shadow-sm" id="cin" name="cin" >
+                    <div class="row mb-3">
+                        <label for="adress" class="col-sm-2 col-form-label">date :</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="flatpickr js-flatpickr-date from-control" name="dateRdv" placeholder="selection date">
+                        </div>
                     </div>
-                </div>
-                <div class="row mb-3">
-                    <label for="adress" class="col-sm-2 col-form-label">date :</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="flatpickr js-flatpickr-date from-control" name="dateRdv" placeholder="selection date">
+                    <div class="row mb-3">
+                        <label for="adress" class="col-sm-2 col-form-label">time :</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="flatpickr js-flatpickr-time from-control" name="heureRdv" placeholder="selection date">
+                        </div>
                     </div>
-                </div>
-                <div class="row mb-3">
-                    <label for="adress" class="col-sm-2 col-form-label">time :</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="flatpickr js-flatpickr-time from-control" name="timeRdv" placeholder="selection date">
+                    <div class="d-grid">
+                        <button type="submit"   class="btn btn-success">Ajouter Rdv</button>
                     </div>
-                </div>
-                <div class="d-grid">
-                    <button type="submit"   class="btn btn-success">Ajouter Rdv</button>
-                </div>
-            </form>
+                </form>
           </div>
         </div>
     </div>
@@ -78,9 +78,9 @@
 <script>
     date={
         enableTime: true,
-        dateFormat: "Y-m-d H:i",
+        dateFormat: "Y-m-d ",
         altInput:true,
-        altFormat:"d F,Y(H:S K)"
+        altFormat:"d F,Y"
     }
     time={
         enableTime: true,

@@ -14,20 +14,19 @@ return new class extends Migration
     public function up()
     {
         Schema::create('patients', function (Blueprint $table) {
-            $table->codePatient();
-            $table->string("nomPatient",30);
-            $table->string("prenomPatient",30);
-            $table->string("adressPatient");
-            $table->string("telefonePatient");
-            $table->enum("sexePatient",["Monsieur","Madame","autre"]);
-            $table->string("dateNaissancePatient");
+            $table->id();
+            $table->string("nomPatient",30)->nullable();
+            $table->string("prenomPatient",30)->nullable();
+            $table->string("adressPatient")->nullable();
+            $table->string("telefonePatient")->nullable();
+            $table->enum("sexePatient",["Monsieur","Madame","autre"])->nullable();
+            $table->string("dateNaissancePatient")->nullable();
 	        $table->string("cin",8)->format('DA')->unique();
             
 
-          
-            // $table->unsignedBigInteger("user_id")->nullable()->change();
-            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-           
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+       
             $table->timestamps();
         });
     }

@@ -13,14 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('rendez-vouses', function (Blueprint $table) {
-            $table->numeroRdv();
+        Schema::create('appointments', function (Blueprint $table) {
+            $table->id();
             $table->string("nom")->nullable();
             $table->string("prenom")->nullable();
             $table->string("cin",8)->format('DA')->unique();
             $table->date('dateRdv');
-            $table->date('heureRdv');
-
+            $table->time('heureRdv')->nullable();
+           
+            $table->unsignedBigInteger('patient_id')->nullable();
+            $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');
 
             $table->timestamps();
         });
@@ -33,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rendez-vouses');
+        Schema::dropIfExists('appointments');
     }
 };
