@@ -17,7 +17,7 @@
     @endif
     <table class="table table-bordered">
         <tr class="tr-style">
-            <th class="thBorderleft">Code Patient</th>
+            <th class="thBorderleft text-center">#Code </th>
             <th>Nom</th>
             <th>Prenon</th>
             <th>Adress</th>
@@ -29,7 +29,7 @@
         </tr>
         @foreach ($patient as $key => $item)
             <tr>
-                <td>{{ $item->codePatient }}</td>
+                <td>{{ $item->id }}</td>
                 <td>{{ $item->nomPatient }}</td>
                 <td>{{ $item->prenomPatient }}</td>
                 <td>{{ $item->adressPatient }}</td>

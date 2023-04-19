@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Appointment;
 use App\Models\Patient;
-
+use Illuminate\Console\Scheduling\Event;
 use Illuminate\Http\Request;
 
 class RdvDashboardController extends Controller
@@ -16,6 +16,13 @@ class RdvDashboardController extends Controller
      */
     public function index()
     {
+        // if(request()->ajax()){
+        //     $date=(!empty($_GET['dateRdv'])) ?($_GET['dateRdv']):('');
+        //     $heure =(!empty($_GET['heureRdv'])) ?($_GET['heureRdv']):('');
+        //     $events=Event::whereDate('dateRdv','=',$date)->whereDate('heureRdv','=',$heure)
+        //     ->get(['id','nom','prenom','cin','dateRdv','heureRdv']);
+        //     return response()->json($events);
+        // }
         return view('RdvPanel.allAppointment');
     }
 
@@ -26,7 +33,7 @@ class RdvDashboardController extends Controller
      */
     public function create()
     {
-        return view('RdvPanel.calendar');
+        return view('RdvPanel.createApp');
     }
 
     /**
@@ -37,32 +44,34 @@ class RdvDashboardController extends Controller
      */
     public function store(Request $request )
     {
-        $patient = Patient::create([
-            'nomPatient' => $request->input('nom'),
-            'prenomPatient' => $request->input('prenom'),
-            'cin' => $request->input('cin'),
-        ]);
-        $patientLast= Patient::orderBy('created_at','DESC')->first();
+        $patient = Patient::where('cin', $request->cin)->first();
         
+        if(!$patient){
+            Patient::create([
+                'nomPatient' => $request->input('nom'),
+                'prenomPatient' => $request->input('prenom'),
+                'cin' => $request->input('cin'),
+            ]);
+        }
+
+        $appointment = appointment::where('dateRdv', $request->dateRdv)->where('heureRdv', $request->heureRdv)->first();
+
+        if($appointment){
+            return 'deja resrve';
+        }
 
         $appointment = Appointment::create([
-            'patient_id' => $patientLast->id,
+            'patient_id' => $patient->id,
             'dateRdv' => $request->input('dateRdv'),
             'heureRdv' => $request->input('heureRdv'),
             'nom' => $request->input('nom'),
             'prenom' => $request->input('prenom'),
             'cin' => $request->input('cin'),
-
         ]);
-    
-        // Redirect to a success page or a page that displays the newly created data.
-    
-        // $patient ;
-        // $appointment =appointment::create($request->all());
-            
-        // dd($appointment) ;
         return redirect()->route('appointment.index',$appointment)
                         ->with('success','Rdv created successfully');
+        
+        
     }
 
     /**

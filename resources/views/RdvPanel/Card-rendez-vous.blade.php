@@ -10,6 +10,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="{{ asset('assets\css\HoureStyle.css') }}">
+        @yield('head')
     </head>
 <body>
     
@@ -100,6 +101,7 @@
                                       <input type="date" name="date" class=" shadow-sm" >
                                     </div>
                                     <div class="row text-center mx-0">
+
                                         <div class="row mt-3">
                                           @foreach ($available_times as $time=>$t) 
                                             <div class="col-sm-3">
@@ -110,11 +112,12 @@
                                         </div>
                                     </div>
                                   {{--  </div>  --}}
-                                </form>                    
-                            <div class="buttons button_space">
+                                  <div class="buttons button_space">
                                 <button class="back_button">Back</button>
                                 <button class="next_button">Next Step</button>
                             </div>
+                                </form>                    
+                            
                 </div>
                 <div class="main">
                      <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
@@ -137,7 +140,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>  
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.js"></script>
 <script src="{{ asset('assets\js\HoureJs.js') }}"></script>  
-
+@yield('script')
 
 </body>
 </html>

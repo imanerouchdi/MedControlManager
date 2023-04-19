@@ -10,7 +10,7 @@
     {{--  <title>{{ config('app.name', 'Laravel 9 User Roles and Permissions Tutorial') }}</title>  --}}
     <title>Configuration users</title>
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    {{--  <script src="{{ asset('js/app.js') }}" defer></script>  --}}
     <!-- Fonts -->
     
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -20,18 +20,18 @@
 </head>
 <body>
     <div id="app">
-        <div class="bg-black">
-           <H1>Bonjour : {{ Auth::user()->name }}</H1> 
+        <div class="">
+           {{--  <H1>Bonjour : {{ Auth::user()->name }}</H1>   --}}
         {{--  <nav class="navbar navbar-expand-md navbar-light navbar-laravel">  --}}
-            <div class="container">
+            {{--  <div class="">  --}}
                 {{--  <h3 class="navbar-brand fs-2 " href="{{ url('/') }}">
                     Bienvenu dans l&#39;espace des utilisateur
                 </h3>  --}}
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                {{--  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
-                </button>
+                </button>  --}}
     
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                {{--  <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto"></ul>
 
@@ -49,12 +49,12 @@
                             
                         @endguest
                     </ul>
-                </div>
-            </div>
+                </div>  --}}
+            {{--  </div>  --}}
         {{--  </nav>  --}}
 
 
-        <main class="py-4">
+        <main class="">
             <div class="container">
             @yield('content')
             

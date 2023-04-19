@@ -122,7 +122,7 @@ border-end-end-radius: 55px !important;
   padding: 20px !important; 
   color: #F9F5EB !important;
 }
-.tr-style{
+/* .tr-style{
   background-color: #002B5B !important;
   border-top-left-radius: 25px !important; 
   border-top-right-radius: 25px !important; 
@@ -140,6 +140,7 @@ border-left-style:  solid;
   border-top-left-radius: 40px !important;
 border-left-style: none !important;
 
+
 }
 .thBorderright{
   border-top-right-radius: 40px !important;
@@ -147,3 +148,10 @@ border-right-style: none !important;
 
 
 }
+.card-primary{
+  background-color: #002B5B !important;
+  border-top-left-radius: 25px !important; 
+  border-top-right-radius: 25px !important; 
+  padding: 20px !important; 
+  color: #F9F5EB !important;
+} */

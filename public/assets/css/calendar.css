@@ -1,3 +1,6 @@
 .container.calendar-container {
   margin-top: 3rem!important;
 }
+.card-primary{
+  background-color: #002B5B !important;
+}

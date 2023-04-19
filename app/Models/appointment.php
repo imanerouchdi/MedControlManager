@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class appointment extends Model
 {
     use HasFactory;
-    // protected $primaryKey = ['numeroRdv','codePatient'];
-
+    
     protected $fillable = [
         'dateRdv',
         'heureRdv',

@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\RdvDashboardController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,7 +37,7 @@ Route::get('/adminLayout',[HomeController ::class, 'dashboard'])->name('adminLay
 Route::get('/page',[HomeController::class,'page'])->name('page');
 ROUTE::get('/',[RendezVousController::class,'index'])->name('index');
 
-Route::resource('calendar',CalendarController::class);
+// Route::resource('calendars',CalendarController::class);
 
 
 // Route::group(['namespace'=>'auth:sanctum'],function(){
@@ -85,6 +86,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('consultation',ConsultationController::class);
     Route::resource('appointment',RdvDashboardController::class);
     Route::resource('patient',PatientController::class);
+    Route::resource('calendar',CalendarController::class);
 
     // Route::resource('patient',PatientController::class);
     // Route::post('/patient',[PatientController::class,'store'])->name('patient.create');

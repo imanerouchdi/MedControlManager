@@ -43,7 +43,7 @@
                         data-bs-target="#submenu1"><i class="far fa-calendar-alt me-2"></i>Appointment
                         <i class="fa fa-caret-down float-end"></i></a>
                     <div class="collapse" id="submenu1">
-                        <a href="{{route('appointment.index')}}" class="list-group-item list-group-item-action">All Appointment</a>
+                        <a href="{{route('calendar.index')}}" class="list-group-item list-group-item-action">All Appointment</a>
                         <a href="{{route('appointment.create')}}" class="list-group-item list-group-item-action">ajouter Appointment</a>
                     </div>
                 </div>
