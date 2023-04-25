@@ -15,7 +15,7 @@ class BussinessHourController extends Controller
     public function index()
     {
         $bussinessHours=BussinessHour::all();
-        return view('RdvPanel.test',compact('bussinessHours'));
+        return view('RdvPanel.reserve',compact('bussinessHours'));
     }
     
 

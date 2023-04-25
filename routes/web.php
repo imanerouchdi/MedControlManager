@@ -34,7 +34,7 @@ Route::get('/Admin-dashboard',[HomeController ::class, 'dashboard'])->name('Admi
 Route::get('/',[HomeController ::class, 'index'])->name('index');
 
 // Route::get('/index',[HomeController::class,'page'])->name('page');
-// ROUTE::get('/rendez-vous',[RendezVousController::class,'index'])->name('rendez-vous');// ancient route
+ROUTE::get('/rendezVous',[RendezVousController::class,'index'])->name('rendez-vous');// ancient route
 
 
 Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])
@@ -59,6 +59,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('fullcalendar',FullCalendarController::class);
     Route::resource('appointmentAdmin',AppointmentAdminController::class);
     Route::resource('appointmentUser',AppointmentUserController::class);
+    Route::get('/available/{date}',[AppointmentUserController::class, 'availableHours']);
     
 
     // Route::resource('patient',PatientController::class);

@@ -102,18 +102,14 @@
                             <h2>Veuillez choisir la date du rendez-vous</h2>
                         </div>
                         
-
-                        {{--
-                        
-                        {{--  <!-- button -->
                         <div class="buttons">
                             <button class="next_button" type="submit">Next Step</button>
                         </div>
-                    </div>  --}}
+                    </div>  
                     
 
 
-                    /*
+                   
                     
                     <div class="main ">
                         <small><i class="fa fa-smile-o"></i></small>
@@ -267,8 +263,8 @@
                             <p>Thanks Mr./Mrs. <span class="shown_name"></span> your information have been submitted successfully for the future reference we will contact you soon.</p>
                         </div>
                     </div>
-                    */
-                
+                    
+                  
                   
     
                 

@@ -20,8 +20,12 @@ class AppointmentUserController extends Controller
     public function index()
     {
         $data = [];
+        
         // get date 
         $datePeriod=CarbonPeriod::create(now(),now()->addDays(6));
+        // dd($datePeriod);
+        // $time = now()->dayOfWeek();
+
         
         foreach($datePeriod as $date){
              $dayName = $date->format('l');
@@ -35,6 +39,8 @@ class AppointmentUserController extends Controller
             ->map(function($time){
                 return $time->format('H:i');
             })->toArray();
+        // dd($currentAppointments);
+
             
             /* Appointment reserve */
             $availbleHours=array_diff($dayOff,$currentAppointments);
@@ -50,8 +56,33 @@ class AppointmentUserController extends Controller
                 'off'=>$bussinessHours->off,
             ]; 
         }
-        // dd($currentAppointments);
+        
         return view("RdvPanel.reserve",compact('data'));
+    }
+
+    public function availableHours($date){
+        $dayName = date('l', strtotime($date));
+            if($dayName == 'Sunday'){
+                return response()->json([
+                    'data'=> ''
+                ]);
+            }
+                $bussinessHours=BussinessHour::where('day',$dayName)->first();
+                // ne pas afficher les heures qui on pas court avec temp actuel
+
+                $dayOff = array_filter($bussinessHours->TimesPeriod) ;
+
+                $currentAppointments =BussinessDay::where('date',$date)
+                ->pluck('time')
+                ->map(function($time){
+                    return $time->format('H:i');
+                })->toArray();
+
+            $availbleHours=array_diff($dayOff,$currentAppointments);
+            return response()->json([
+                'data'=>$availbleHours
+            ]);
+
     }
 
     /**
@@ -61,7 +92,7 @@ class AppointmentUserController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -74,16 +105,10 @@ class AppointmentUserController extends Controller
     {
         // dd($request->validated());
         $appointmentUser = $request->merge(['user_id'=>auth()->id()])->toArray();
-        dd($appointmentUser);
+        // dd($appointmentUser);
          BussinessDay::create($appointmentUser);
-        // return 'good';
+        return 'good';
         
-        
-    }
-    public function test(Request $request)
-    {
-        // dd(auth()->id());
-        return ('test');
         
     }
     /**
