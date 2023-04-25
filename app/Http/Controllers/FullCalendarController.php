@@ -2,28 +2,41 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Appointment;
+use App\Http\Requests\CalendarRequest;
+use App\Models\appointment;
 use App\Models\Patient;
-use Illuminate\Console\Scheduling\Event;
-use Illuminate\Http\Request;
+use Carbon\Carbon;
+use RealRashid\SweetAlert\Facades\Alert;
 
-class RdvDashboardController extends Controller
+
+
+
+class FullCalendarController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+    
+    
+   
+
     public function index()
     {
-        // if(request()->ajax()){
-        //     $date=(!empty($_GET['dateRdv'])) ?($_GET['dateRdv']):('');
-        //     $heure =(!empty($_GET['heureRdv'])) ?($_GET['heureRdv']):('');
-        //     $events=Event::whereDate('dateRdv','=',$date)->whereDate('heureRdv','=',$heure)
-        //     ->get(['id','nom','prenom','cin','dateRdv','heureRdv']);
-        //     return response()->json($events);
-        // }
-        return view('RdvPanel.allAppointment');
+        $events=array();
+        
+        $allAppointment=appointment::all();
+        foreach ( $allAppointment as $appointment){
+            $events[]=[
+                'title'=>$appointment->nom,
+                'start'=>$appointment->dateRdv,
+                'end'=>$appointment->heureRdv,
+
+            ] ;
+        }
+        
+        return view ('RdvPanel.Fullcalendar',['events'=>$events]);
     }
 
     /**
@@ -33,7 +46,7 @@ class RdvDashboardController extends Controller
      */
     public function create()
     {
-        return view('RdvPanel.createApp');
+        //
     }
 
     /**
@@ -42,12 +55,13 @@ class RdvDashboardController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request )
+    public function store(CalendarRequest $request)
     {
         $patient = Patient::where('cin', $request->cin)->first();
         
         if(!$patient){
-            Patient::create([
+
+            $patient=Patient::create([
                 'nomPatient' => $request->input('nom'),
                 'prenomPatient' => $request->input('prenom'),
                 'cin' => $request->input('cin'),
@@ -57,7 +71,8 @@ class RdvDashboardController extends Controller
         $appointment = appointment::where('dateRdv', $request->dateRdv)->where('heureRdv', $request->heureRdv)->first();
 
         if($appointment){
-            return 'deja resrve';
+            return 'deja reserve';
+            // return redirect()->route('fullcalendar.store')->with('errornom','User created successfully');
         }
 
         $appointment = Appointment::create([
@@ -67,10 +82,10 @@ class RdvDashboardController extends Controller
             'nom' => $request->input('nom'),
             'prenom' => $request->input('prenom'),
             'cin' => $request->input('cin'),
+
         ]);
-        return redirect()->route('appointment.index',$appointment)
-                        ->with('success','Rdv created successfully');
-        
+        return 'save';
+
         
     }
 

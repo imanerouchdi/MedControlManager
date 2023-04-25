@@ -11,14 +11,17 @@
         {{--  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">  --}}
         <script src='{{ asset("assets/js/calendar.js") }}'></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" integrity="sha512-gOQQLjHRpD3/SEOtalVq50iDn4opLVup2TF8c4QPI3/NmUPNZOk2FG0ihi8oCU/qYEsw4P6nuEZT2lAG0UNYaw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
         
     </head>
 <body>
-    
+    @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
+
       <div class="calendar-container">
         <div class="row  ">
             <div class="w-50 m-auto ">
-                <form class="shadow p-3 mb-5 bg-body rounded" method="Post" action="{{route('appointment.store')}}">
+                <form class="shadow p-3 mb-5 bg-body rounded" method="Post" action="{{route('appointmentAdmin.store')}}">
                     @csrf
                     <h1 class="text-center mb-3 text-secondary">Ajouter</h1>
                     <div class="row mb-3">
@@ -72,15 +75,14 @@
       
 
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>     
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script>
     date={
-        enableTime: true,
+        enableTime: false,
         dateFormat: "Y-m-d ",
         altInput:true,
-        altFormat:"d F,Y"
     }
     time={
         enableTime: true,
@@ -93,7 +95,10 @@
     }
     flatpickr(".flatpickr.js-flatpickr-date", date);
     flatpickr(".flatpickr.js-flatpickr-time", time);
+    {{--  swal("congratulation !","");  --}}
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js" integrity="sha512-7VTiy9AhpazBeKQAlhaLRUk+kAMAb8oczljuyJHPsVPWox/QIXDFOnT9DUk1UC8EbnHKRdQowT7sOBe7LAjajQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 </body>
 </html>
 @endsection

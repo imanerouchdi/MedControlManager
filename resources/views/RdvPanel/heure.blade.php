@@ -1,6 +1,6 @@
 {{--  @extends('RdvPanel.Card-rendez-vous')  --}}
 
-{{--  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -8,15 +8,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    {{--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">      --}}
-    {{--  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">      --}}
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">  --}}
     <link rel="stylesheet" href="{{ asset('assets\css\HoureStyle.css') }}">  --}}
-{{--  </head>  --}}
+</head>
 
-{{--  <body>   --}}
+<body> 
 
 
-    {{--  <div class="container-fluid px-0 px-sm-4 mx-auto">
+      <div class="container-fluid px-0 px-sm-4 mx-auto">
         <div class="row justify-content-center mx-0">
             <div class="col col-md-8">
                 <div class="card">
@@ -69,10 +69,10 @@
                 </div>
             </div>
         </div>
-    </div>  --}}
+    </div> 
 
 
-    {{--  <div class="container-fluid px-0 px-sm-4 mx-auto">
+    <div class="container-fluid px-0 px-sm-4 mx-auto">
       <div class="row justify-content-center mx-0">
         <div class="  col-md-6">
           <div class="card-sm ">
@@ -105,7 +105,7 @@
           </div>
         </div>
       </div>
-    </div>  --}}
+    </div>
 
     @section('heure')
     <div class="container-fluid px-0 px-sm-4 mx-auto">
@@ -126,24 +126,18 @@
                   </div>
                   <div class="row text-center mx-0">
                       <div class="row">
-                        {{--  @foreach ($available_times as $time)   --}}
                           <div class="col-md-3">
-                            {{--  <button type="button" class="btn 3 border rounded-1 mt-1 mb-1 bg-light " >{{$time}}</button>  --}}
+                              <button type="button" class="btn 3 border rounded-1 mt-1 mb-1 bg-light " >vvv</button>  
                           </div>
-                          {{--  @endforeach   --}}
-                           {{--  w-100  --}}
+                         
                       </div>
                   </div>
                 </div>
               </form>
-              @endsection
-{{--  </body>  --}}
+              @endsection</body> 
 
 
 
-
-
-{{--  @foreach ($available_times as $time)  @endforeach   --}}
                      
 
 
@@ -155,10 +149,10 @@
 
 
 
-{{--  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.js"></script>
 <script src="{{ asset('assets\js\HoureJs.js') }}"></script>  --}}
 
-{{--  </body>
+</body>
 
-</html>  --}}
+</html> 

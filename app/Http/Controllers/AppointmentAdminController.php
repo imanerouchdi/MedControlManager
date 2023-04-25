@@ -2,38 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\appointment;
+use App\Models\Appointment;
 use App\Models\Patient;
-use Carbon\Carbon;
+use Illuminate\Console\Scheduling\Event;
+use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 
-
-class CalendarController extends Controller
+class AppointmentAdminController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    
-    
-   
-
     public function index()
     {
-        $events=array();
-        $allAppointment=appointment::all();
-        foreach ( $allAppointment as $appointment){
-            $events[]=[
-                'title'=>$appointment->nom,
-                'start'=>$appointment->dateRdv,
-                'end'=>$appointment->heureRdv,
-
-            ] ;
-        }
-        
-        return view ('RdvPanel.allAppointment',['events'=>$events]);
+        // if(request()->ajax()){
+        //     $date=(!empty($_GET['dateRdv'])) ?($_GET['dateRdv']):('');
+        //     $heure =(!empty($_GET['heureRdv'])) ?($_GET['heureRdv']):('');
+        //     $events=Event::whereDate('dateRdv','=',$date)->whereDate('heureRdv','=',$heure)
+        //     ->get(['id','nom','prenom','cin','dateRdv','heureRdv']);
+        //     return response()->json($events);
+        // }
+        return view('AdminPanel.adminLayout');
     }
 
     /**
@@ -43,7 +35,7 @@ class CalendarController extends Controller
      */
     public function create()
     {
-        //
+        return view('RdvPanel.AppointmentAdmin');
     }
 
     /**
@@ -52,20 +44,17 @@ class CalendarController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request )
     {
         $patient = Patient::where('cin', $request->cin)->first();
         
         if(!$patient){
-            // $request->validate([
-            //     'nom'=>'required|string',
-            // ]);
-
-            Patient::create([
+            $patient = Patient::create([
                 'nomPatient' => $request->input('nom'),
                 'prenomPatient' => $request->input('prenom'),
                 'cin' => $request->input('cin'),
             ]);
+
         }
 
         $appointment = appointment::where('dateRdv', $request->dateRdv)->where('heureRdv', $request->heureRdv)->first();
@@ -81,11 +70,13 @@ class CalendarController extends Controller
             'nom' => $request->input('nom'),
             'prenom' => $request->input('prenom'),
             'cin' => $request->input('cin'),
-
         ]);
+    
+        Alert::success('Success App', 'Success Message');
 
-
-        return 'save';
+        return redirect()->route('appointmentAdmin.index',$appointment);
+        
+        
     }
 
     /**

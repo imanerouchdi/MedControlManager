@@ -1,5 +1,5 @@
 <footer>
-    <div class="container py-4 py-lg-5">
+    <div class="py-4 py-lg-5">
         <div class="text-muted d-flex justify-content-between align-items-center pt-3">
             <p class="mb-0">Copyright © 2023 Brand</p>
             <ul class="list-inline mb-0">

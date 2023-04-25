@@ -19,10 +19,14 @@
 
 <body>
     <nav class="navbar navbar-light navbar-expand-md fixed-top navbar-shrink py-3" id="mainNav">
-        <div class="container"><a class="navbar-brand d-flex align-items-center"
-                href="/"><span>Imane</span></a><button data-bs-toggle="collapse" class="navbar-toggler"
-                data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span
-                    class="navbar-toggler-icon"></span></button>
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                {{--  <span>Imane</span>  --}}
+            </a>
+            <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
+                <span class="visually-hidden">Toggle navigation</span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item"><a class="nav-link" href="integrations.html">Rendez-vous</a></li>
@@ -75,7 +79,7 @@
                                 class="underline">médecin</span>!</h1>
                         <p class="fs-5 text-muted mb-5">prenez soin de votre santé !</p>
                         <div class=" mb-3 "><a class="btn btn-primary w-75 shadow-lg" type="submit"
-                                href="{{ route('register') }}">enregistrer et prenez votre rendez-vous ! </a></div>
+                                href=""> prenez votre rendez-vous ! </a></div>
                     </div>
                 </div>
             </div>

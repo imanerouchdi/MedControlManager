@@ -23,23 +23,20 @@ class RedirectIfAuthenticated
 
             foreach($guards as $guard){
                 if(Auth::guard($guard)->check()){
-                return redirect(RouteServiceProvider::HOME);
+
+                    $user = Auth::user();
+                    
+                    if(!empty($user->getRoleNames())){
+                        $roles = $user->getRoleNames()->toArray();
+
+                        if(in_array('Admin', $roles) || in_array('Assistant', $roles)){
+                            return redirect(RouteServiceProvider::HOME);
+                        }
+                    }
+                return redirect(RouteServiceProvider::INDEX);
 
                 }
             }
-
-
-
-
-            // if (Auth::guard('web')->check()) {
-            //     return redirect(RouteServiceProvider::HOME);
-            // }
-            // if (Auth::guard('medecin')->check()) {
-            //     return redirect(RouteServiceProvider::MEDECIN);
-            // }
-            // if (Auth::guard('assistant')->check()) {
-            //     return redirect(RouteServiceProvider::ASSISTANT);
-            // }
         
 
         return $next($request);

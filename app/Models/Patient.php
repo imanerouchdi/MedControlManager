@@ -21,14 +21,6 @@ class Patient extends Model
         'numeroRdv'
     ];
 
-    // public function consultations()
-    // {
-    //     return $this->hasMany(Consultation::class);
-    // }
-    // public function user()
-    // {
-    //     return this->belongsTo(user::class); 
-    // }
     public function appointment(){
         return $this->hasMany(Appointment::class);
     }

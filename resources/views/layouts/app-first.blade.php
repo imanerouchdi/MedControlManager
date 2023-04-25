@@ -20,6 +20,9 @@
 </head>
 <body>
     <div id="app">
+        @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
+
+
         <div class="">
            {{--  <H1>Bonjour : {{ Auth::user()->name }}</H1>   --}}
         {{--  <nav class="navbar navbar-expand-md navbar-light navbar-laravel">  --}}
@@ -35,7 +38,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto"></ul>
 
-
+--}}
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
@@ -49,7 +52,7 @@
                             
                         @endguest
                     </ul>
-                </div>  --}}
+                </div>  
             {{--  </div>  --}}
         {{--  </nav>  --}}
 

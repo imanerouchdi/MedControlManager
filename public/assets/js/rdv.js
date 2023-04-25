@@ -1,6 +1,6 @@
 var next_click=document.querySelectorAll(".next_button");
 var main_form=document.querySelectorAll(".main");
-var step_list = document.querySelectorAll(".progress-bars li");
+var step_list = document.querySelectorAll(".steper li");
 var num = document.querySelector(".step-number");
 let formnumber=0;
 
@@ -39,19 +39,19 @@ submit_click.forEach(function(submit_click_form){
     });
 });
 
-// var heart=document.querySelector(".fa-heart");
-// heart.addEventListener('click',function(){
-//    heart.classList.toggle('heart');
-// });
+var heart=document.querySelector(".fa-heart");
+heart.addEventListener('click',function(){
+   heart.classList.toggle('heart');
+});
 
 
-// var share=document.querySelector(".fa-share-alt");
-// share.addEventListener('click',function(){
-//    share.classList.toggle('share');
-// });
+var share=document.querySelector(".fa-share-alt");
+share.addEventListener('click',function(){
+   share.classList.toggle('share');
+});
 
  
-
+//main_form=div
 function updateform(){
     main_form.forEach(function(mainform_number){
         mainform_number.classList.remove('active');
@@ -60,11 +60,11 @@ function updateform(){
 } 
  
 function progress_forward(){
-    step_list.forEach(list => {
+    // step_list.forEach(list => {
         
-        list.classList.remove('active');
+    //     list.classList.remove('active');
          
-    }); 
+    // }); 
     
      
     num.innerHTML = formnumber+1;

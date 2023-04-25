@@ -13,6 +13,8 @@
 </head>
 
 <body>
+    @include('sweetalert::alert')
+
     <div class="d-flex" id="wrapper">
         <!-- Sidebar -->
         <div class="sideBar" id="sidebar-wrapper">
@@ -25,7 +27,7 @@
                         Patient</a>  --}}
 
                 </div>
-                <a href="{{route('adminLayout')}}" class="list-group-item list-group-item-action bg-transparent second-text active">
+                <a href="" class="list-group-item list-group-item-action bg-transparent second-text active">
                     <i class="fas fa-tachometer-alt me-2"></i>MedControl</a>
                     <div class="">
                         <a href="#" class="list-group-item list-group-item-action active" data-bs-toggle="collapse"
@@ -43,8 +45,8 @@
                         data-bs-target="#submenu1"><i class="far fa-calendar-alt me-2"></i>Appointment
                         <i class="fa fa-caret-down float-end"></i></a>
                     <div class="collapse" id="submenu1">
-                        <a href="{{route('calendar.index')}}" class="list-group-item list-group-item-action">All Appointment</a>
-                        <a href="{{route('appointment.create')}}" class="list-group-item list-group-item-action">ajouter Appointment</a>
+                        <a href="{{route('fullcalendar.index')}}" class="list-group-item list-group-item-action">All Appointment</a>
+                        <a href="{{route('appointmentAdmin.create')}}" class="list-group-item list-group-item-action">ajouter Appointment</a>
                     </div>
                 </div>
                 <div class="">
