@@ -1,13 +1,13 @@
 <?php
 
 return [
-    'days'=>[
-        'lundi',
-        'mardi',
-        'mercredi',
-        'jeudi',
-        'vendredi',
-        'samedi',
-        'dimanche'
+    'days' => [
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+        'Sunday'
     ]
 ];

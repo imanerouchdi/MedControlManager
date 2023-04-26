@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('bussiness_days', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->date('date');
-            $table->time('time');
+            $table->date('date')->nullable();
+            $table->time('time')->nullable();
             
             $table->timestamps();
         });

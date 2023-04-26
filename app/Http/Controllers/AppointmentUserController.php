@@ -8,7 +8,10 @@ use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 use App\Models\BussinessHour;
 use App\Models\BussinessDay;
+use App\Models\Patient;
+
 use Carbon\Carbon;
+use Illuminate\Support\Arr;
 
 class AppointmentUserController extends Controller
 {
@@ -17,13 +20,19 @@ class AppointmentUserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $data = [];
+
+        // $pickdate = now();
         
         // get date 
-        $datePeriod=CarbonPeriod::create(now(),now()->addDays(6));
-        // dd($datePeriod);
+        $datePeriod=CarbonPeriod::create(now(),now()->addMonth());
+        // $dateArray = iterator_to_array($datePeriod);
+        // $dateCollection = collect($dateArray);
+        // $var=$dateCollection->paginate(7);
+        // dd($var);
+        // dd($var);
         // $time = now()->dayOfWeek();
 
         
@@ -54,10 +63,28 @@ class AppointmentUserController extends Controller
                 'full_date'=>$date->format('Y-m-d'),
                 'available_hours'=>$availbleHours,
                 'off'=>$bussinessHours->off,
-            ]; 
+            ];  
         }
+        $page = request()->get('page', 1);
+        $perPage = 7;
+        // dd( count($data));
+        $paginator = new \Illuminate\Pagination\LengthAwarePaginator(
+            array_slice($data, ($page - 1) * $perPage, $perPage),
+            count($data),
+            $perPage,
+            $page,
+            ['path' => request()->url(), 'query' => request()->query()]
+        );
         
-        return view("RdvPanel.reserve",compact('data'));
+        // if ($request->ajax()) {
+        //     // If the request is an Ajax request, return the data as JSON
+        //     return response()->json(['paginator' => $paginator->toArray()]);
+        // } else {
+        //     // Otherwise, return the view with the paginated data
+        //     return view('RdvPanel.reserve', ['paginator' => $paginator]);
+        // }
+        
+        return view("RdvPanel.reserve",compact('paginator'));
     }
 
     public function availableHours($date){
@@ -103,11 +130,70 @@ class AppointmentUserController extends Controller
      */
     public function store(AppointmentUserRequest $request)
     {
-        // dd($request->validated());
+        
         $appointmentUser = $request->merge(['user_id'=>auth()->id()])->toArray();
-        // dd($appointmentUser);
-         BussinessDay::create($appointmentUser);
-        return 'good';
+       
+         
+         $businessDay = BussinessDay::create($appointmentUser);
+        //   dd($businessDay->id);
+
+
+        $patient = Patient::where('cin', $request->cin)->first();
+        if(!$patient){
+            $patient = Patient::create([
+                'nomPatient' => $request->input('nom'),
+                'prenomPatient' => $request->input('prenom'),
+                'cin' => $request->input('cin'),
+            ]);
+        }
+       
+       // appointment
+       $appointment = Appointment::create([
+        'patient_id' => $patient->id,
+        'bussiness_days_id' => $businessDay->id,
+        'dateRdv' => $request->input('date'),
+        'heureRdv' => $request->input('time'),
+        'nom' => $request->input('nom'),
+        'prenom' => $request->input('prenom'),
+        'cin' => $request->input('cin'),
+        
+    ]);
+    return 'good';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         
         
     }
@@ -155,4 +241,5 @@ class AppointmentUserController extends Controller
     {
         //
     }
+    
 }

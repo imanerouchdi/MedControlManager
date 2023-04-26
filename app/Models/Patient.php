@@ -24,5 +24,11 @@ class Patient extends Model
     public function appointment(){
         return $this->hasMany(Appointment::class);
     }
-     
+     public function user(){
+        return $this->belongsTo(User::class);
+    }
+    public function bussiness_days(){
+        return $this->belongsTo(BussinessDay::class);
+
+    }
 }

@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('bussiness_hours', function (Blueprint $table) {
             $table->id();
             $table->string('day')->unique();
-            $table->time('from');
-            $table->time('to');
-            $table->unsignedInteger('step')->default(60);
-            $table->boolean('off')->default(false);
+            $table->time('from')->nullable();
+            $table->time('to')->nullable();
+            $table->unsignedInteger('step')->default(60)->nullable();
+            $table->boolean('off')->default(false)->nullable();
             $table->timestamps();
         });
     }

@@ -21,8 +21,17 @@ class BussinessDay extends Model
         'date',
         'time',
     ];
-    // public function users()
-    // {
-    //     return $this->belongsTo(User::class);
-    // }
+    public function users()
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function patients()
+    {
+        return $this->belongsTo(Patient::class);
+    }
+    public function Appointment()
+    {
+        return $this->belongsTo(Appointment::class);
+    }
+
 }

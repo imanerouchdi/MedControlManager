@@ -15,7 +15,10 @@ class BussinessHour extends Model
     
     public function getTimesPeriodAttribute(){
 
+        // before aplic seeder
+        // All Appointment (from :9->17)
         $times = CarbonInterval::minutes($this->step)->toPeriod($this->from,$this->to)->toArray();
+        
         // get the time equal with the current time not prevent/disabled last appointment
         return  array_map (function ($time){
             if ($this->day == today()->format('l') && !$time->isPast()) {

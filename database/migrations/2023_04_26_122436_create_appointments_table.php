@@ -18,11 +18,18 @@ return new class extends Migration
             $table->string("nom")->nullable();
             $table->string("prenom")->nullable();
             $table->string("cin",8)->format('DA')->unique();
-            $table->date('dateRdv');
+            $table->date('dateRdv')->nullable();
             $table->time('heureRdv')->nullable();
-           
+            $table->integer('status')->default(0)->nullable();
+            
+            
             $table->unsignedBigInteger('patient_id')->nullable();
             $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');
+            
+
+            $table->unsignedBigInteger('bussiness_days_id');
+            $table->foreign('bussiness_days_id')->references('id')->on('bussiness_days')->onDelete('cascade');
+
 
             $table->timestamps();
         });

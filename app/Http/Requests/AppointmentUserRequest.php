@@ -26,6 +26,10 @@ class AppointmentUserRequest extends FormRequest
     public function rules()
     {
         return [
+            'nom' => 'required|string:',
+            'prenom' => 'required |string',
+            'cin' => 'required|string|size:8 ',
+            
             'date'=>['required','date_format:Y-m-d'],
             'time'=>['required','date_format:H:i'],
         ];
