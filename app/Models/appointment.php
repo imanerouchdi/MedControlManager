@@ -17,10 +17,14 @@ class Appointment extends Model
         'nom',
         'bussiness_days_id',
         'prenom',
-        // 'numeroRdv',
     ];
-    public function patients()
+    public function patient()
     {
         return $this->belongsTo(Patient::class);
     }
+    public function consultation()
+    {
+        return $this->hasOne(Consultation::class);
+    }
+
 }

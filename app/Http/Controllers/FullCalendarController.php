@@ -19,7 +19,13 @@ class FullCalendarController extends Controller
      * @return \Illuminate\Http\Response
      */
     
-    
+     function __construct()
+     {
+          $this->middleware('permission:consultation-list|consultation-create|consultation-edit|consultation-delete', ['only' => ['index','show']]);
+          $this->middleware('permission:consultation-create', ['only' => ['create','store']]);
+          $this->middleware('permission:consultation-edit', ['only' => ['edit','update']]);
+          $this->middleware('permission:consultation-delete', ['only' => ['destroy']]);
+     }
    
 
     public function index()

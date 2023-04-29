@@ -8,22 +8,26 @@ use Illuminate\Database\Eloquent\Model;
 class Consultation extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'idCon';
+    
 
     protected $fillable = [
-        'codePatient',
-        'numeroRdv',
+        
         'description',
         'dateCon',
-        'prccdsixCon',
+        'prixCon',
+        'patient_id',
+        'Appointment_id',
+        
 
     ];
-    public function patients()
+   
+    public function appointment()
+    {
+        return $this->belongsTo(Appointment::class, 'Appointment_id');
+    }
+
+    public function patient()
     {
         return $this->belongsTo(Patient::class);
-    }
-    public function rendezvous()
-    {
-        return $this->belongsTo(RendezVous::class);
     }
 }

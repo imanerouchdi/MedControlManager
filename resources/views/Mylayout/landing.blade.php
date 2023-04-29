@@ -79,7 +79,7 @@
                                 class="underline">médecin</span>!</h1>
                         <p class="fs-5 text-muted mb-5">prenez soin de votre santé !</p>
                         <div class=" mb-3 "><a class="btn btn-primary w-75 shadow-lg" type="submit"
-                                href=""> prenez votre rendez-vous ! </a></div>
+                            href="{{route('appointmentUser.index')}}"> prenez votre rendez-vous ! </a></div>
                     </div>
                 </div>
             </div>
@@ -106,7 +106,7 @@
                     <h1>contact nous</h1>
                 </div>
             </div>
-            <div class="row gy-4 gy-md-0">
+            {{--  <div class="row gy-4 gy-md-0">
                 <div
                     class="col-md-6 d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-md-start align-items-md-center justify-content-xl-center">
                     <div class="row gy-2 row-cols-1 row-cols-sm-2">
@@ -120,7 +120,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>  --}}
         </div>
     </section>
 
@@ -154,9 +154,9 @@
     </footer>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/startup-modern.js"></script>
-    <script type="text/javascript"
+    {{--  <script type="text/javascript"
         src="https://maps.google.com/maps/api/js?key={{ env('GOOGLE_MAP_KEY') }}&callback=initMap"></script>
-    <script type="text/javascript">
+    --}}<script type="text/javascript">  
         function initMap() {
             const myLatLng = {
                 lat: 22.2734719,

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}" />
     @yield('style')
+    @yield('links')
     <title>MedControlManager</title>
 </head>
 
@@ -56,8 +57,8 @@
                         <i class="fas fa-chart-line me-2"></i>Consultation
                         <i class="fa fa-caret-down float-end"></i></a>
                     <div class="collapse" id="consult">
-                        <a href="{{route('consultation.index')}}" class="list-group-item list-group-item-action">Ajouter consult</a>
-                        <a href="" class="list-group-item list-group-item-action">Item 2</a>
+                        <a href="{{route('appointmentConsultation')}}" class="list-group-item list-group-item-action">Add Consultation </a>
+                        <a href="{{route('consultation.index')}}" class="list-group-item list-group-item-action"> all consultultation</a>
                     </div>
                 </div>
                 <div class="">
@@ -68,8 +69,6 @@
                     <div class="collapse" id="document">
                         <a class="list-group-item list-group-item-action" href="{{ route('users.index') }}">All
                             users</a>
-                        <a class="list-group-item list-group-item-action" href="{{ route('roles.index') }}">Role &
-                            Permission</a>
                         <a class="list-group-item list-group-item-action" href="{{ route('roles.index') }}">Role &
                             Permission</a>
                     </div>
@@ -136,13 +135,13 @@
                     </ul>
                 </div>
             </nav>
-            <div class="container px-4 py-5">
+            <div class="container px-4 py-2">
                 @yield('app')
             </div>
 
         </div>
     </div>
-    <!-- /#page-content-wrapper -->
+    <!-- /#page-content-wrapper -->bootstrap@5.0.2
     </div>
     @yield('script')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>

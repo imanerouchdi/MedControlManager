@@ -28,10 +28,10 @@ class AppointmentUserRequest extends FormRequest
         return [
             'nom' => 'required|string:',
             'prenom' => 'required |string',
-            'cin' => 'required|string|size:8 ',
+            // 'cin' => 'required|string|size:6|unique ',
             
-            'date'=>['required','date_format:Y-m-d'],
-            'time'=>['required','date_format:H:i'],
+            // 'date'=>['required','date_format:Y-m-d'],
+            // 'time'=>['required','date_format:H:i'],
         ];
     }
 

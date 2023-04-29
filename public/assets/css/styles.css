@@ -5,6 +5,16 @@
   --second-bg-color: #d6e8f8; */
 }
 
+.alert-success {
+    color: #fdfdfd !important;
+    background-color: #008000 !important;
+    border-color: #056b3d !important;
+}
+.alert-danger {
+  color: #FFFFF0;
+  background-color: #DC143C;
+  border-color: #F08080;
+}
 .primary-text {
   color: var(--main-text-color);
 }

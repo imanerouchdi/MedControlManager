@@ -18,11 +18,15 @@ class Patient extends Model
         "cin",
         'sexePatient',
         "dateNaissancePatient",
-        'numeroRdv'
+        'numeroRdv',
+        'user_id',
     ];
 
     public function appointment(){
         return $this->hasMany(Appointment::class);
+    }
+    public function consultation(){
+        return $this->hasMany(consultation::class);
     }
      public function user(){
         return $this->belongsTo(User::class);
@@ -31,4 +35,5 @@ class Patient extends Model
         return $this->belongsTo(BussinessDay::class);
 
     }
+  
 }

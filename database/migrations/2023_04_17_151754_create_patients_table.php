@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string("telefonePatient")->nullable();
             $table->enum("sexePatient",["Monsieur","Madame","autre"])->nullable();
             $table->string("dateNaissancePatient")->nullable();
-	        $table->string("cin",8)->format('DA')->unique();
+	        $table->string("cin",6)->format('DA')->unique();
 	        $table->string("code")->unique();
             
 

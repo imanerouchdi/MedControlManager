@@ -187,6 +187,8 @@ return [
         /*
          * Package Service Providers...
          */
+        // Service Provider DomPDF
+	    Barryvdh\DomPDF\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -216,6 +218,8 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        // facade laravel-dompdf
+        "PDF" => Barryvdh\DomPDF\Facade::class,
     ])->toArray(),
 
 ];

@@ -13,23 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('appointments', function (Blueprint $table) {
+        Schema::create('consultations', function (Blueprint $table) {
             $table->id();
-            $table->string("nom")->nullable();
-            $table->string("prenom")->nullable();
-            $table->string("cin",8)->format('DA');
-            $table->date('dateRdv')->nullable();
-            $table->time('heureRdv')->nullable();
-            $table->integer('status')->default(0)->nullable();
-            
-            
+            $table->string('description')->nullable();
+            $table->integer('prixCon')->nullable();
+            $table->date('dateCon')->nullable();
+
             $table->unsignedBigInteger('patient_id')->nullable();
             $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');
             
 
-            $table->unsignedBigInteger('bussiness_days_id')->nullable();
-            $table->foreign('bussiness_days_id')->references('id')->on('bussiness_days')->onDelete('cascade');
-
+            $table->unsignedBigInteger('Appointment_id')->nullable();
+            $table->foreign('Appointment_id')->references('id')->on('appointments')->onDelete('cascade');
 
             $table->timestamps();
         });
@@ -42,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('appointments');
+        Schema::dropIfExists('_consultations');
     }
 };

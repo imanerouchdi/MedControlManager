@@ -12,6 +12,8 @@ class HomeController extends Controller
     public function dashboard(){
         return view('AdminPanel.adminLayout');
     }
-    
+    public function print(){
+        return view('consultation.imprime');
+    }
 
 }

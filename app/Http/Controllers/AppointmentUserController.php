@@ -20,6 +20,13 @@ class AppointmentUserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // function __construct()
+    // {
+    //      $this->middleware('permission:consultation-list|consultation-create|consultation-edit|consultation-delete', ['only' => ['index','show']]);
+    //      $this->middleware('permission:consultation-create', ['only' => ['create','store']]);
+    //      $this->middleware('permission:consultation-edit', ['only' => ['edit','update']]);
+    //      $this->middleware('permission:consultation-delete', ['only' => ['destroy']]);
+    // }
     public function index(Request $request)
     {
         $data = [];
@@ -37,7 +44,7 @@ class AppointmentUserController extends Controller
 
         
         foreach($datePeriod as $date){
-             $dayName = $date->format('l');
+            $dayName = $date->format('l');
             $bussinessHours=BussinessHour::where('day',$dayName)->first();
             // ne pas afficher les heures qui on pas court avec temp actuel
 
@@ -104,8 +111,9 @@ class AppointmentUserController extends Controller
                 ->map(function($time){
                     return $time->format('H:i');
                 })->toArray();
-
+                
             $availbleHours=array_diff($dayOff,$currentAppointments);
+            dd($availbleHours);
             return response()->json([
                 'data'=>$availbleHours
             ]);
@@ -128,8 +136,10 @@ class AppointmentUserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AppointmentUserRequest $request)
+    public function store(Request $request)
     {
+
+        // dd($req);
         
         $appointmentUser = $request->merge(['user_id'=>auth()->id()])->toArray();
        
@@ -153,8 +163,8 @@ class AppointmentUserController extends Controller
         'bussiness_days_id' => $businessDay->id,
         'dateRdv' => $request->input('date'),
         'heureRdv' => $request->input('time'),
-        'nom' => $request->input('nom'),
-        'prenom' => $request->input('prenom'),
+        'nom' =>$patient-> nomPatient,
+        'prenom' => $patient->prenomPatient,
         'cin' => $request->input('cin'),
         
     ]);

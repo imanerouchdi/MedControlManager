@@ -14,7 +14,7 @@ use App\Http\Controllers\AppointmentAdminController;
 use App\Http\Controllers\AppointmentUserController;
 use App\Http\Controllers\BussinessHourController;
 use App\Http\Controllers\FullCalendarController;
-
+use App\Http\Controllers\AllAppointmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,13 +54,19 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles',RoleController::class);
     Route::resource('users',UserController::class);
-    Route::resource('consultation',ConsultationController::class);
     Route::resource('patient',PatientController::class);
     Route::resource('fullcalendar',FullCalendarController::class);
     Route::resource('appointmentAdmin',AppointmentAdminController::class);
     Route::resource('appointmentUser',AppointmentUserController::class);
     Route::get('/available/{date}',[AppointmentUserController::class, 'availableHours']);
+    Route::get('/ConfirmAppointment',[AppointmentUserController::class, 'ConfirmAppointment'])->name('ConfirmAppointment');
     
+    Route::resource('consultation',ConsultationController::class);
+    Route::match(['get', 'post'],'Showconsultation/{id}',[ConsultationController::class , 'Showconsultation'])->name('Showconsultation');
+    Route::Post('/add',[ConsultationController::class ,'register'])->name('add');
+    Route::get('/appointmentConsultation',[ConsultationController::class, 'appointmentConsultation'])->name('appointmentConsultation');
+    Route::get('/print-consultation/{id}', 'ConsultationController@print')->name('consultation.print');
+   
 
     // Route::resource('patient',PatientController::class);
     // Route::post('/patient',[PatientController::class,'store'])->name('patient.create');
@@ -77,7 +83,6 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
     // Route::get('/dashboard', function () {
     //     return view('dashboard');
     // })->name('dashboard');
-// Route::get('/index',[HomeController ::class, 'index'])->name('index');
 
 
 
@@ -85,6 +90,5 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
 
 });
 
-// Auth::routes();
+Route::get('/print',[HomeController ::class, 'print'])->name('print');
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
