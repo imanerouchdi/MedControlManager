@@ -7,7 +7,6 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\MedecinController;
 use App\Http\Controllers\AssistantController;
-use App\Http\Controllers\RendezVousController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AppointmentAdminController;
@@ -28,29 +27,7 @@ use App\Http\Controllers\DossierMedicalPatientController;
 |
 */
 
-
-
-//////////////////////////////////////////////// ------ TYPE USER ------ ////////////////////////////////////////////////
-Route::get('/Admin-dashboard',[HomeController ::class, 'dashboard'])->name('Admin-dashboard');
-Route::get('/',[HomeController ::class, 'index'])->name('index');
-
-// Route::get('/index',[HomeController::class,'page'])->name('page');
-ROUTE::get('/rendezVous',[RendezVousController::class,'index'])->name('rendez-vous');// ancient route
-
-
-Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])
-    ->group(function () {
-        // Route::get('/adminLayout', function () {
-        //     return view('AdminPanel.adminLayout');
-        // })->name('adminLayout');
-});
-
-
-
-//////////////////////////////////////////////// ------ Patient ------ ////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////// ------ Patient ------ ////////////////////////////////////////////////
+//////////////////////////////////////////////// ------ Auth ------ ////////////////////////////////////////////////
 
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles',RoleController::class);
@@ -68,27 +45,22 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/appointmentConsultation',[ConsultationController::class, 'appointmentConsultation'])->name('appointmentConsultation');
     Route::get('/print-consultation/{id}', [ConsultationController::class, 'print'])->name('consultation.print');
     Route::resource('dossierPatient',DossierMedicalPatientController::class);
+    Route::get('/showAllAppointment',[AppointmentAdminController::class,'showAllAppointment'])->name('showAllAppointment');
+    Route::get('/filterCIN',[AppointmentAdminController::class,'filterCIN'])->name('filterCIN');
+    Route::delete('/delete',[AppointmentAdminController::class,'delete'])->name('delete');
+    
+    
+    });
 
-    // Route::resource('patient',PatientController::class);
-    // Route::post('/patient',[PatientController::class,'store'])->name('patient.create');
-    // Route::get('/patient',[PatientController::class,'index'])->name('patient.index');
-});
-Route::resource('rendez-vous',BussinessHourController::class);
-
-Route::get('/user', [HomeController::class, 'index'])->name('user');
-Route::get('/landing',[LoginController::class, 'redirectodashboard'])->name('landing');
-
-
-
-Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])->group(function () {
-    // Route::get('/dashboard', function () {
-    //     return view('dashboard');
-    // })->name('dashboard');
+// Route::get('/landing',[LoginController::class, 'redirectodashboard'])->name('landing');
+    Route::get('/Admin-dashboard',[HomeController ::class, 'dashboard'])->name('Admin-dashboard');
+    Route::get('/',[HomeController ::class, 'index'])->name('index');
+    Route::get('/print',[HomeController ::class, 'print'])->name('print');
 
 
 
 
+// Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])->group(function () {
 
-});
+// });
 
-Route::get('/print',[HomeController ::class, 'print'])->name('print');

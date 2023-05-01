@@ -23,7 +23,7 @@
             <div class="w-50 m-auto ">
                 <form class="shadow p-3 mb-5 bg-body rounded" method="Post" action="{{route('appointmentAdmin.store')}}">
                     @csrf
-                    <h1 class="text-center mb-3 text-secondary">Ajouter</h1>
+                    <h1 class="text-center mb-3 text-secondary">Ajouter Rendez-vous</h1>
                     <div class="row mb-3">
                         <label for="nom" class="col-sm-2 col-form-label">Nom :</label>
                         <div class="col-sm-3">

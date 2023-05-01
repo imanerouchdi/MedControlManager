@@ -73,22 +73,27 @@
         <div class="card shadow rounded border-0">
             <div class="card-body">
                 <h2 class="card-title text-start mb-4">Mes rendez-vous</h2>
+                <div class="pull-right">
+                    <a class="btn btn-primary" href="{{ route('appointmentUser.index') }}"> Back</a>
+                </div>
                 <form class="mx-2 my-1" action="{{route('appointmentUser.store')}}" method="POST">
                     @csrf 
                     @method('POST')
                     <table class="table">
                         <thead class="table-light">
                             <tr>
-                                <th scope="col">Date</th>
-                                <th scope="col">Heure</th>
                                 <th scope="col">Nom Prenom </th>
                                 <th scope="col">CIN</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Heure</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($appointments as $appointment)
                             <tr>
                                 {{--  <th scope="row">{{$appointment->id}}</th>  --}}
+                                <td>{{$appointment->nom}} {{$appointment->prenom}}</td>
+                                <td>{{$appointment->cin}}</td>
                                 <td>{{$appointment->dateRdv}}</td>
                                 <td>{{$appointment->heureRdv}}</td>
                                 <td>@mdo</td>

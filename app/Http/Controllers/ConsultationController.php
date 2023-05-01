@@ -121,6 +121,7 @@ class ConsultationController extends Controller
      */
     public function destroy(Consultation $consultation)
     {
+        
         $consultation->delete();
     
         return redirect()->route('consultation.index')

@@ -26,11 +26,14 @@ class AppointmentAdminController extends Controller
     }
     public function index()
     {
+        
        
         if(request()->ajax()){
+            
             $date=(!empty($_GET['dateRdv'])) ?($_GET['dateRdv']):('');
             $heure =(!empty($_GET['heureRdv'])) ?($_GET['heureRdv']):('');
-            $events=Event::whereDate('dateRdv','=',$date)->whereDate('heureRdv','=',$heure)
+            $events=Event::whereDate('dateRdv','=',$date)
+            ->whereDate('heureRdv','=',$heure)
             ->get(['id','nom','prenom','cin','dateRdv','heureRdv']);
             return response()->json($events);
         }
@@ -97,7 +100,7 @@ class AppointmentAdminController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -131,6 +134,44 @@ class AppointmentAdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // return $id;
+        
+    }
+    public function showAllAppointment(){
+
+        $appointment=Appointment::all();
+        
+        return view('RdvPanel.index',compact('appointment'));
+    }
+    public function filterCIN(Request $request)
+    {
+        $output= "";
+        $cinAppointments=Appointment::where('cin','like','%'.$request->filterCIN.'%')->get();
+        
+        foreach($cinAppointments as $cinAppointment){
+            $output.=
+            '
+            <tr id='.$cinAppointment->id.'>
+                <td>'.$cinAppointment->id.'</td
+                <td>'.$cinAppointment->nom.'</td>
+                <td>'.$cinAppointment->id.'</td>
+                <td>'.$cinAppointment->cin.'</td>
+                <td>'.$cinAppointment->dateRdv.'</td>
+                <td>'.$cinAppointment->heureRdv.'</td>
+                <td>
+                <a href="javascript:void(0)" data-id='.$cinAppointment->id.' class="btn btn-warning delete-btn"> Delete</a>
+                   </td>               
+            </tr>';
+        }
+        return response($output); 
+        
+    }
+    public function delete(Request $request){
+        $appointment=Appointment::findOrFail($request->id)->delete();
+        dd($appointment);
+    
+        return response()->json([
+            'status'=>'success',
+        ]);
     }
 }

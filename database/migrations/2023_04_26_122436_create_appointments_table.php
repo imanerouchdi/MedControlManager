@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string("nom")->nullable();
             $table->string("prenom")->nullable();
-            $table->string("cin",8)->format('DA');
+            $table->string("cin",6)->format('DA');
             $table->date('dateRdv')->nullable();
             $table->time('heureRdv')->nullable();
             $table->integer('status')->default(0)->nullable();

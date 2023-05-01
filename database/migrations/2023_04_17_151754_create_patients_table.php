@@ -22,7 +22,7 @@ return new class extends Migration
             $table->enum("sexePatient",["Monsieur","Madame","autre"])->nullable();
             $table->string("dateNaissancePatient")->nullable();
 	        $table->string("cin",6)->format('DA')->unique();
-	        $table->string("code")->unique();
+	        
             
 
             $table->unsignedBigInteger('user_id')->nullable();

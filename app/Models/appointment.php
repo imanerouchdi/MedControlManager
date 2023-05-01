@@ -9,6 +9,10 @@ class Appointment extends Model
 {
     use HasFactory;
     
+    protected $guarded=[];
+    protected $casts=[
+        'heureRdv'=>'datetime:H:i'
+    ];
     protected $fillable = [
         'dateRdv',
         'heureRdv',
