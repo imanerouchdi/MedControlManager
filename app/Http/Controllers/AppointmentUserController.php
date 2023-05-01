@@ -29,8 +29,9 @@ class AppointmentUserController extends Controller
     // }
     public function index(Request $request)
     {
+        
         $data = [];
-
+       
         // $pickdate = now();
         
         // get date 
@@ -41,21 +42,32 @@ class AppointmentUserController extends Controller
         // dd($var);
         // dd($var);
         // $time = now()->dayOfWeek();
-
+        
         
         foreach($datePeriod as $date){
-            $dayName = $date->format('l');
+            // get name of date
+             $dayName = $date->format('l');
+            /*
+                     "id" => 6
+                    "day" => "Saturday"
+                    "from" => "09:00:00"
+                    "to" => "17:00:00"
+                    "step" => 30
+                    "off" => 0
+                    "created_at" => "2023-04-28 22:19:47"
+                    "updated_at" => "2023-04-28 22:19:47"
+            */
             $bussinessHours=BussinessHour::where('day',$dayName)->first();
-            // ne pas afficher les heures qui on pas court avec temp actuel
-
+            // afficher bussinessHour all table
             $dayOff = array_filter($bussinessHours->TimesPeriod) ;
+            // dd($bussinessHours->TimesPeriod);
 
             $currentAppointments =BussinessDay::where('date',$date->toDateString())
             ->pluck('time')
             ->map(function($time){
                 return $time->format('H:i');
             })->toArray();
-        // dd($currentAppointments);
+            // dd($currentAppointments);
 
             
             /* Appointment reserve */
@@ -70,11 +82,13 @@ class AppointmentUserController extends Controller
                 'full_date'=>$date->format('Y-m-d'),
                 'available_hours'=>$availbleHours,
                 'off'=>$bussinessHours->off,
-            ];  
+            ];
+
         }
+        
         $page = request()->get('page', 1);
         $perPage = 7;
-        // dd( count($data));
+        
         $paginator = new \Illuminate\Pagination\LengthAwarePaginator(
             array_slice($data, ($page - 1) * $perPage, $perPage),
             count($data),
@@ -82,15 +96,6 @@ class AppointmentUserController extends Controller
             $page,
             ['path' => request()->url(), 'query' => request()->query()]
         );
-        
-        // if ($request->ajax()) {
-        //     // If the request is an Ajax request, return the data as JSON
-        //     return response()->json(['paginator' => $paginator->toArray()]);
-        // } else {
-        //     // Otherwise, return the view with the paginated data
-        //     return view('RdvPanel.reserve', ['paginator' => $paginator]);
-        // }
-        
         return view("RdvPanel.reserve",compact('paginator'));
     }
 
@@ -103,7 +108,7 @@ class AppointmentUserController extends Controller
             }
                 $bussinessHours=BussinessHour::where('day',$dayName)->first();
                 // ne pas afficher les heures qui on pas court avec temp actuel
-
+            
                 $dayOff = array_filter($bussinessHours->TimesPeriod) ;
 
                 $currentAppointments =BussinessDay::where('date',$date)
@@ -111,9 +116,8 @@ class AppointmentUserController extends Controller
                 ->map(function($time){
                     return $time->format('H:i');
                 })->toArray();
-                
+
             $availbleHours=array_diff($dayOff,$currentAppointments);
-            dd($availbleHours);
             return response()->json([
                 'data'=>$availbleHours
             ]);
@@ -139,10 +143,9 @@ class AppointmentUserController extends Controller
     public function store(Request $request)
     {
 
-        // dd($req);
+        
         
         $appointmentUser = $request->merge(['user_id'=>auth()->id()])->toArray();
-       
          
          $businessDay = BussinessDay::create($appointmentUser);
         //   dd($businessDay->id);
@@ -154,9 +157,11 @@ class AppointmentUserController extends Controller
                 'nomPatient' => $request->input('nom'),
                 'prenomPatient' => $request->input('prenom'),
                 'cin' => $request->input('cin'),
+                'user_id' =>$appointmentUser['user_id'],
             ]);
+            // dd($patient);
+
         }
-       
        // appointment
        $appointment = Appointment::create([
         'patient_id' => $patient->id,
@@ -168,44 +173,17 @@ class AppointmentUserController extends Controller
         'cin' => $request->input('cin'),
         
     ]);
-    return 'good';
+    // dd($appointment);
+    return 'googd';
+    // dd($patient);
 
+    // return redirect()->back()->with('status', 'We have e-mailed your password reset link!');
+   
+    // return redirect()->route('ConfirmAppointment')->
+    // with('status', 'Votre RDV est bien reçu et en attente de confirmation de la part du praticien.
+    // <br>Vous recevrez un Appel dans les plus brefs délais');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-        
+     
     }
     /**
      * Display the specified resource.
@@ -215,7 +193,7 @@ class AppointmentUserController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -250,6 +228,21 @@ class AppointmentUserController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function ConfirmAppointment(){
+
+        $patients = Patient::where('user_id',Auth()->user()->id)->first();
+        // foreach($patient )
+        // dd($patients);
+
+        $appointments= Appointment::where('patient_id',$patients->id)->first();
+        // dd($appointments);
+    
+   
+
+
+
+        return view('RdvPanel.ConfirmAppointment',compact('appointments'));
     }
     
 }

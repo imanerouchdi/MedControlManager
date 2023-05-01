@@ -10,16 +10,11 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" href="{{ asset('assets\css\styles.css') }}">
         <meta charset='utf-8' />
-        {{--  <script src='{{ asset("assets/js/calendar.js") }}'></script>  --}}
+       <script src='{{ asset("assets/js/calendar.js") }}'></script>
         <script src='{{ asset("assets/js/index.global.js") }}'></script>
-        <script src='{{ asset("assets/js/index.global.min.js") }}'></script>
+        <script src='{{ asset("assets/js/index.global.min.js") }}'></script>  
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.0/sweetalert2.min.css" integrity="sha512-rogivVAav89vN+wNObUwbrX9xIA8SxJBWMFu7jsHNlvo+fGevr0vACvMN+9Cog3LAQVFPlQPWEOYn8iGjBA71w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-        {{--  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">  --}}
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-        {{--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.0.0/index.min.js">  --}}
-        
-        {{--  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.0.0/index.js"></script>  --}}
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
@@ -140,11 +135,16 @@
       </div>
     </div>
 
-
     <script>
 
         document.addEventListener('DOMContentLoaded', function() {
+       
           var appointment=@json($events);
+          var today = new Date();
+        appointment = appointment.filter(function(event) {
+          return new Date(event.start) >= today;
+        });
+
           $.ajaxSetup({
               headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -153,7 +153,8 @@
           var calendarEl = document.getElementById('calendar');
            
           var calendar = new FullCalendar.Calendar(calendarEl, {
-            
+            timeZone: 'local',
+            initialDate: today,
               headerToolbar:{
                left:'prev,next today',
                center: 'title',
@@ -167,9 +168,15 @@
             selectable: true,
             selectMirror: true,
             nowIndicator: true,
-            select:function(start,end,allDays){
+            select:function(info){
+              var start = info.start;
+              var dateRdvInput = document.getElementById("dateRdv");
+              var dateRdvPicker = flatpickr("#dateRdv");
+              dateRdvPicker.setDate(start);
+              dateRdvInput.value = dateRdvPicker.input.value;
               $('#exampleModal').modal('toggle');
               /*create appointment*/
+              
               $('#save').click(function(){
                 $('.error_messages').html('');
                   var nom=$('#nom').val();
@@ -177,6 +184,7 @@
                   var cin=$('#cin').val();
                   var dateRdv=$('#dateRdv').val();
                   var heureRdv=$('#heureRdv').val();
+                  var date =moment(start).format('YYYY-MM-DD');
                   
                   $.ajax({
                     url:"{{route('fullcalendar.store')}}",
@@ -184,11 +192,18 @@
                     dataType:"json",
                     data:{nom,prenom,cin,dateRdv,heureRdv},
                     success:function(result){
-                      console.log(result)
+                      calendar.addEvent({
+                        title: result.nom + ' ' + result.prenom,
+                        start: result.dateRdv + 'T' + result.heureRdv,
+                        end: result.dateRdv + 'T' + result.heureRdv,
+                        extendedProps: {
+                          cin: result.cin
+                        }
+                      });
+                     
                     },
                     error:function(result)
                     {
-                      console.log(result);
                       if(result.responseText=='deja reserve'){
                         $('#deja_reserve').html('deja reserver');
                       }
@@ -212,6 +227,7 @@
         });
       
       </script>
+      
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>     
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.0/sweetalert2.all.min.js" integrity="sha512-0UUEaq/z58JSHpPgPv8bvdhHFRswZzxJUT9y+Kld5janc9EWgGEVGfWV1hXvIvAJ8MmsR5d4XV9lsuA90xXqUQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script>
 date={

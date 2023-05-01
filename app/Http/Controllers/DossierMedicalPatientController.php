@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DossierMedicalPatient;
 use Illuminate\Http\Request;
-use App\Models\RendezVous;
-use Carbon\Carbon;
 
-class RendezVousController extends Controller
+class DossierMedicalPatientController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,31 +14,7 @@ class RendezVousController extends Controller
      */
     public function index()
     {
-        
-
-        // set the start time
-        // $time = Carbon::createFromFormat('H:i', '09:00');
-        
-        // // create an array to hold the available times
-        // $available_times = [];
-        
-        // // loop through 12 times to get the time every 30 minutes for 6 hours
-        // for ($i = 0; $i <17; $i++) {
-        //     $available_times[] = $time->format('H:i');
-        //     $time->addMinutes(30);
-        // }
-       
-        
-        // pass the array of available times to the view
-        
-        return view('RdvPanel.Card-rendez-vous');
-        
-
-
-
-
-
-        // return view ('rendez-vous' ,compact('heur'));
+        return view ('dossierMedical.index');
     }
 
     /**
@@ -49,7 +24,8 @@ class RendezVousController extends Controller
      */
     public function create()
     {
-        //
+        return view ('dossierMedical.create');
+        
     }
 
     /**
@@ -66,21 +42,22 @@ class RendezVousController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\DossierMedicalPatient  $dossierMedicalPatient
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(DossierMedicalPatient $dossierMedicalPatient)
     {
-        //
+        return view ('dossierMedical.show');
+        
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\DossierMedicalPatient  $dossierMedicalPatient
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(DossierMedicalPatient $dossierMedicalPatient)
     {
         //
     }
@@ -89,10 +66,10 @@ class RendezVousController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\DossierMedicalPatient  $dossierMedicalPatient
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, DossierMedicalPatient $dossierMedicalPatient)
     {
         //
     }
@@ -100,10 +77,10 @@ class RendezVousController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\DossierMedicalPatient  $dossierMedicalPatient
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(DossierMedicalPatient $dossierMedicalPatient)
     {
         //
     }

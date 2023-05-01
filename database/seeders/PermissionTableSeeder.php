@@ -31,10 +31,10 @@ class PermissionTableSeeder extends Seeder
            'consultation-edit',
            'consultation-delete',
            
-           'rendez-vous-list',
-           'rendez-vous-create',
-           'rendez-vous-edit',
-           'rendez-vous-delete',
+           'appointment-list',
+           'appointment-create',
+           'appointment-edit',
+           'appointment-delete',
            
            'document-medecal-list',
            'document-medecal-create',

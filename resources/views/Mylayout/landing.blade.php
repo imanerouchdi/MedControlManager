@@ -5,15 +5,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Home - Brand</title>
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-     <link href="https://fonts.googleapis.com/css2?=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,100;1,200;1,300;1,400;1,500&display=swap" rel="stylesheet">
+    {{--  <link href="https://fonts.googleapis.com/css2?=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,100;1,200;1,300;1,400;1,500&display=swap" rel="stylesheet">  --}}
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
-    <style type="text/css">
+    {{--  <style type="text/css">
         #map {
             height: 400px;
         }
-    </style>
+    </style>  --}}
 
 </head>
 
@@ -106,21 +105,21 @@
                     <h1>contact nous</h1>
                 </div>
             </div>
-            {{--  <div class="row gy-4 gy-md-0">
+            <div class="row gy-4 gy-md-0">
                 <div
                     class="col-md-6 d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-md-start align-items-md-center justify-content-xl-center">
                     <div class="row gy-2 row-cols-1 row-cols-sm-2">
                         <div class="container mt-5">
-                            <div id="map">
+                            {{--  <div id="map">
                                 <iframe
                                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10537.55292350274!2d-8.524696842405232!3d32.25206348183306!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdaee2d4d7d4c337%3A0x3e72d780e0ecf09d!2sH%C3%B4pital%20Multidisciplinaire%20Youssoufia!5e0!3m2!1sfr!2sma!4v1680105489289!5m2!1sfr!2sma"
                                     width="900" height="450" style="border:0;" allowfullscreen="" loading="lazy"
                                     referrerpolicy="no-referrer-when-downgrade"></iframe>
-                            </div>
+                            </div>  --}}
                         </div>
                     </div>
                 </div>
-            </div>  --}}
+            </div>
         </div>
     </section>
 
@@ -152,11 +151,12 @@
             </div>
         </div>
     </footer>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/startup-modern.js"></script>
+    {{--  <script src="assets/js/startup-modern.js"></script>  --}}
     {{--  <script type="text/javascript"
         src="https://maps.google.com/maps/api/js?key={{ env('GOOGLE_MAP_KEY') }}&callback=initMap"></script>
-    --}}<script type="text/javascript">  
+  <script type="text/javascript">  
         function initMap() {
             const myLatLng = {
                 lat: 22.2734719,
@@ -175,7 +175,7 @@
         }
 
         window.initMap = initMap;
-    </script>
+    </script>  --}}
 </body>
 
 </html>

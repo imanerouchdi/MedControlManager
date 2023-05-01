@@ -15,6 +15,7 @@ use App\Http\Controllers\AppointmentUserController;
 use App\Http\Controllers\BussinessHourController;
 use App\Http\Controllers\FullCalendarController;
 use App\Http\Controllers\AllAppointmentController;
+use App\Http\Controllers\DossierMedicalPatientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,8 +66,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::match(['get', 'post'],'Showconsultation/{id}',[ConsultationController::class , 'Showconsultation'])->name('Showconsultation');
     Route::Post('/add',[ConsultationController::class ,'register'])->name('add');
     Route::get('/appointmentConsultation',[ConsultationController::class, 'appointmentConsultation'])->name('appointmentConsultation');
-    Route::get('/print-consultation/{id}', 'ConsultationController@print')->name('consultation.print');
-   
+    Route::get('/print-consultation/{id}', [ConsultationController::class, 'print'])->name('consultation.print');
+    Route::resource('dossierPatient',DossierMedicalPatientController::class);
 
     // Route::resource('patient',PatientController::class);
     // Route::post('/patient',[PatientController::class,'store'])->name('patient.create');
@@ -91,4 +92,3 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
 });
 
 Route::get('/print',[HomeController ::class, 'print'])->name('print');
-

@@ -19,20 +19,21 @@ class AppointmentAdminController extends Controller
 
      function __construct()
     {
-         $this->middleware('permission:consultation-list|consultation-create|consultation-edit|consultation-delete', ['only' => ['index','show']]);
-         $this->middleware('permission:consultation-create', ['only' => ['create','store']]);
-         $this->middleware('permission:consultation-edit', ['only' => ['edit','update']]);
-         $this->middleware('permission:consultation-delete', ['only' => ['destroy']]);
+         $this->middleware('permission:appointment-list|consultation-create|consultation-edit|consultation-delete', ['only' => ['index','show']]);
+         $this->middleware('permission:appointment-create', ['only' => ['create','store']]);
+         $this->middleware('permission:appointment-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:appointment-delete', ['only' => ['destroy']]);
     }
     public function index()
     {
-        // if(request()->ajax()){
-        //     $date=(!empty($_GET['dateRdv'])) ?($_GET['dateRdv']):('');
-        //     $heure =(!empty($_GET['heureRdv'])) ?($_GET['heureRdv']):('');
-        //     $events=Event::whereDate('dateRdv','=',$date)->whereDate('heureRdv','=',$heure)
-        //     ->get(['id','nom','prenom','cin','dateRdv','heureRdv']);
-        //     return response()->json($events);
-        // }
+       
+        if(request()->ajax()){
+            $date=(!empty($_GET['dateRdv'])) ?($_GET['dateRdv']):('');
+            $heure =(!empty($_GET['heureRdv'])) ?($_GET['heureRdv']):('');
+            $events=Event::whereDate('dateRdv','=',$date)->whereDate('heureRdv','=',$heure)
+            ->get(['id','nom','prenom','cin','dateRdv','heureRdv']);
+            return response()->json($events);
+        }
         return view('AdminPanel.adminLayout');
     }
 
@@ -54,6 +55,7 @@ class AppointmentAdminController extends Controller
      */
     public function store(Request $request )
     {
+        // forme
         $patient = Patient::where('cin', $request->cin)->first();
         
         if(!$patient){
@@ -79,7 +81,7 @@ class AppointmentAdminController extends Controller
             'prenom' => $request->input('prenom'),
             'cin' => $request->input('cin'),
         ]);
-    
+        
         Alert::success('Success App', 'Success Message');
 
         return redirect()->route('appointmentAdmin.index',$appointment);

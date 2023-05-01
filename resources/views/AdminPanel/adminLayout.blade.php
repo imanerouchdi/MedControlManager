@@ -62,10 +62,21 @@
                     </div>
                 </div>
                 <div class="">
-                    {{--  <a href="#" class="list-group-item list-group-item-action ">Main Menu</a>  --}}
                     <a href="#" class="list-group-item list-group-item-action active" data-bs-toggle="collapse"
                         data-bs-target="#document">
-                        <i class="fas fa-paperclip me-2"></i>Document Med</a>
+                        <i class="fas fa-paperclip me-2"></i>Dossier Patient</a>
+                    <div class="collapse" id="document">
+                        <a class="list-group-item list-group-item-action" href="{{ route('dossierPatient.index') }}">All
+                            dossier Patients</a>
+                        <a class="list-group-item list-group-item-action" href="{{ route('dossierPatient.create') }}">add
+                                dossier</a>
+                        
+                    </div>
+                </div>
+                <div class="">
+                    <a href="#" class="list-group-item list-group-item-action active" data-bs-toggle="collapse"
+                        data-bs-target="#document">
+                        <i class="fas fa-paperclip me-2"></i>Document medicaux</a>
                     <div class="collapse" id="document">
                         <a class="list-group-item list-group-item-action" href="{{ route('users.index') }}">All
                             users</a>
@@ -73,15 +84,21 @@
                             Permission</a>
                     </div>
                 </div>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-gift me-2"></i>Dossier medicaux</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-comment-dots me-2"></i>Analytics</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-map-marker-alt me-2"></i>Calendar</a>
+                <div class="">
+                    <a href="#" class="list-group-item list-group-item-action active" data-bs-toggle="collapse"
+                        data-bs-target="#document">
+                        <i class="fas fa-comment-dots me-2"></i>Analytics</a>
+                    <div class="collapse" id="document">
+                        <a class="list-group-item list-group-item-action" href="{{ route('users.index') }}">All
+                            users</a>
+                        <a class="list-group-item list-group-item-action" href="{{ route('roles.index') }}">Role &
+                            Permission</a>
+                    </div>
+                </div>
+
 
                 <div class="">
-                    {{--  <a href="#" class="list-group-item list-group-item-action ">Main Menu</a>  --}}
+                    
                     <a href="#" class="list-group-item list-group-item-action active" data-bs-toggle="collapse"
                         data-bs-target="#users"><i class="fas fa-users-cog me-2"></i> users
                         <i class="fa fa-caret-down float-end"></i></a>

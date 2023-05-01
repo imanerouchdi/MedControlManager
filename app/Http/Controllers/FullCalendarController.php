@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CalendarRequest;
 use App\Models\appointment;
+use App\Models\BussinessDay;
 use App\Models\Patient;
 use Carbon\Carbon;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -19,13 +20,13 @@ class FullCalendarController extends Controller
      * @return \Illuminate\Http\Response
      */
     
-     function __construct()
-     {
-          $this->middleware('permission:consultation-list|consultation-create|consultation-edit|consultation-delete', ['only' => ['index','show']]);
-          $this->middleware('permission:consultation-create', ['only' => ['create','store']]);
-          $this->middleware('permission:consultation-edit', ['only' => ['edit','update']]);
-          $this->middleware('permission:consultation-delete', ['only' => ['destroy']]);
-     }
+    //  function __construct()
+    //  {
+    //     $this->middleware('permission:appointment-list|consultation-create|consultation-edit|consultation-delete', ['only' => ['index','show']]);
+    //     $this->middleware('permission:appointment-create', ['only' => ['create','store']]);
+    //     $this->middleware('permission:appointment-edit', ['only' => ['edit','update']]);
+    //     $this->middleware('permission:appointment-delete', ['only' => ['destroy']]);
+    //  }
    
 
     public function index()
@@ -33,6 +34,7 @@ class FullCalendarController extends Controller
         $events=array();
         
         $allAppointment=appointment::all();
+        
         foreach ( $allAppointment as $appointment){
             $events[]=[
                 'title'=>$appointment->nom,
@@ -63,6 +65,15 @@ class FullCalendarController extends Controller
      */
     public function store(CalendarRequest $request)
     {
+         
+        $appointmentUser = $request->merge(['user_id'=>auth()->id()])->toArray();
+         
+         $businessDay = BussinessDay::create([
+            'date' => $request->input('dateRdv'),
+            'time' => $request->input('heureRdv'),
+            'user_id'=>auth()->id()
+         ]);
+
         $patient = Patient::where('cin', $request->cin)->first();
         
         if(!$patient){
@@ -80,7 +91,7 @@ class FullCalendarController extends Controller
             return 'deja reserve';
             // return redirect()->route('fullcalendar.store')->with('errornom','User created successfully');
         }
-
+       
         $appointment = Appointment::create([
             'patient_id' => $patient->id,
             'dateRdv' => $request->input('dateRdv'),
@@ -88,9 +99,11 @@ class FullCalendarController extends Controller
             'nom' => $request->input('nom'),
             'prenom' => $request->input('prenom'),
             'cin' => $request->input('cin'),
+            'bussiness_days_id'=> $businessDay->id,
+
 
         ]);
-        return 'save';
+        return response()->json($appointment);
 
         
     }
