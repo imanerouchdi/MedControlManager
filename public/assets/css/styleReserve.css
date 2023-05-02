@@ -13,6 +13,10 @@
     background-color: rgb(23, 162, 184) !important;
 
 }
+.bg-info:hover{
+    /* background-color:#fff !important; */
+    color:rgb(23, 162, 184) !important;
+}
 .card{
    border:none !important; 
 }

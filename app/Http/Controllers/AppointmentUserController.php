@@ -7,7 +7,8 @@ use App\Models\Appointment;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 use App\Models\BussinessHour;
-use App\Models\BussinessDay;
+use App\Http\Requests\ReserveRequest;
+
 use App\Models\Patient;
 
 use Carbon\Carbon;
@@ -20,29 +21,21 @@ class AppointmentUserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // function __construct()
-    // {
-    //      $this->middleware('permission:consultation-list|consultation-create|consultation-edit|consultation-delete', ['only' => ['index','show']]);
-    //      $this->middleware('permission:consultation-create', ['only' => ['create','store']]);
-    //      $this->middleware('permission:consultation-edit', ['only' => ['edit','update']]);
-    //      $this->middleware('permission:consultation-delete', ['only' => ['destroy']]);
-    // }
+    function __construct()
+    {
+        // $this->middleware('permission:appointment-list|appointment-create|appointment-edit|appointment-delete', ['only' => ['index','show']]);
+        // $this->middleware('permission:appointment-create', ['only' => ['create','store']]);
+        // $this->middleware('permission:appointment-edit', ['only' => ['edit','update']]);
+        // $this->middleware('permission:appointment-delete', ['only' => ['destroy']]);
+   }
     public function index(Request $request)
     {
 
         $data = [];
 
-        // $pickdate = now();
-
         // get date 
         $datePeriod = CarbonPeriod::create(now(), now()->addMonth());
-        // $dateArray = iterator_to_array($datePeriod);
-        // $dateCollection = collect($dateArray);
-        // $var=$dateCollection->paginate(7);
-        // dd($var);
-        // dd($var);
-        // $time = now()->dayOfWeek();
-
+       
 
         foreach ($datePeriod as $date) {
             // get name of date
@@ -57,23 +50,41 @@ class AppointmentUserController extends Controller
                     "created_at" => "2023-04-28 22:19:47"
                     "updated_at" => "2023-04-28 22:19:47"
             */
+            // le jour courant Monday 1-05-2023
             $bussinessHours = BussinessHour::where('day', $dayName)->first();
-            // afficher bussinessHour all table
-            $dayOff = array_filter($bussinessHours->TimesPeriod);
-            // dd($bussinessHours->TimesPeriod);
+            // les rendez-vous valable 
+            /*
+                2 => "10:00"
+                3 => "10:30"
+                4 => "11:00"
+                5 => "11:30"
+                6 => "12:00"
+                7 => "12:30"
+                8 => "13:00"
+                9 => "13:30"
+                10 => "14:00"
+                11 => "14:30"
+                12 => "15:00"
+                13 => "15:30"
+                14 => "16:00"
+                15 => "16:30"
+                16 => "17:00"
+                ]
+                il supprimer l'heure passe & les bussinessHous reservee
 
+            */
+            $dayOff = array_filter($bussinessHours->TimesPeriod); /* -->  available appointment */
+            // A TimesPeriod : is a specific length of time that is used to measure or represent a duration. 
+            
+           
+            // appointment not available
             $currentAppointments = Appointment::where('dateRdv', $date->toDateString())
                 ->pluck('heureRdv')
                 ->map(function ($time) {
                     return $time->format('H:i');
                 })->toArray();
-            // dd($currentAppointments);
-
-
-            /* Appointment reserve */
             $availbleHours = array_diff($dayOff, $currentAppointments);
-            // dd($availbleHours);
-            //affichage date
+            dd($currentAppointments);
 
             $data[] = [
                 'day_name' => $dayName,
@@ -107,7 +118,6 @@ class AppointmentUserController extends Controller
             ]);
         }
         $bussinessHours = BussinessHour::where('day', $dayName)->first();
-        // ne pas afficher les heures qui on pas court avec temp actuel
 
         $dayOff = array_filter($bussinessHours->TimesPeriod);
 
@@ -140,13 +150,7 @@ class AppointmentUserController extends Controller
      */
     public function store(Request $request)
     {
-
-
-
         $appointmentUser = $request->merge(['user_id' => auth()->id()])->toArray();
-
-        //  $businessDay = BussinessDay::create($appointmentUser);
-        //   dd($businessDay->id);
 
         $patients_id = Patient::where('user_id', Auth()->user()->id)->first();
 
@@ -157,16 +161,12 @@ class AppointmentUserController extends Controller
                 'prenomPatient' => $request->input('prenom'),
                 'cin' => $request->input('cin'),
                 'user_id' => $appointmentUser['user_id'],
-
-
             ]);
-            // dd($patient);
 
         }
         // appointment
         $appointment = Appointment::create([
             'patient_id' => $patient->id,
-            // 'bussiness_days_id' => $businessDay->id,
             'dateRdv' => $request->input('date'),
             'heureRdv' => $request->input('time'),
             'nom' => $patient->nomPatient,
@@ -174,14 +174,9 @@ class AppointmentUserController extends Controller
             'cin' => $request->input('cin'),
 
         ]);
-        // dd($appointment);
-        // return 'googd';
-        // dd($patient);
-
-        // return redirect()->back()->with('status', 'We have e-mailed your password reset link!');
-
-        return redirect()->route('ConfirmAppointment')->with('status', 'Votre RDV est bien reçu et en attente de confirmation de la part du praticien.
-    <br>Vous recevrez un Appel dans les plus brefs délais');
+            return redirect()->route('ConfirmAppointment')->with('status', 'Votre RDV 
+                    est bien reçu et en attente de confirmation de la part du praticien.
+                    Vous recevrez un Appel dans les plus brefs délais');
     }
     /**
      * Display the specified resource.
@@ -230,20 +225,10 @@ class AppointmentUserController extends Controller
     {
 
         $patients = Patient::where('user_id', Auth()->user()->id)->first();
-
-        // $appointments= Appointment::where('patient_id',$patients->id)->first();
-        // dd($appointments);
-
-
-        //$appointments = Appointment::with('')->where('patient_id', 2)->get();
         $appointments = Appointment::join('patients', 'appointments.patient_id', '=', 'patients.id')
             ->join('users', 'patients.user_id', '=', 'users.id')
             ->where('users.id', '=', Auth()->user()->id)
             ->get();
-        //dd($patients->id) ;
-
-
-        // dd($appointments);
 
         return view('RdvPanel.ConfirmAppointment', compact('appointments'));
     }

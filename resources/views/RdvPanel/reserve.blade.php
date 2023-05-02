@@ -93,30 +93,26 @@
                     method="POST">
                     @csrf
                     @method('POST')
-                    <div class="row mb-3 ">
+                    <div class="row mb-1 ">
                         <div class="col-md-6 w-50">
                             <label for="nom" class="form-label">Nom :</label>
-                            <input type="text" class="form-control rounded-pill shadow-sm " id="nom"
-                                name="nom" required placeholder="Nom">
+                            <input type="text" class="form-control rounded-pill shadow-sm " id="nom" name="nom" required  placeholder="Nom">
                         </div>
                         <div class="col-md-6 w-50">
                             <label for="prenom" class="form-label">Prénom :</label>
-                            <input type="text" class="form-control rounded-pill shadow-sm " id="prenom"
-                                name="prenom" required placeholder="Prénom">
+                            <input type="text" class="form-control rounded-pill shadow-sm " id="prenom" name="prenom" required placeholder="Prénom">
                         </div>
                     </div>
                     <div class="mb-3 w-100">
                         <label for="cin" class="form-label">CIN :</label>
-                        <input type="text" class="form-control rounded-pill shadow-sm " id="cin" name="cin"
-                            required placeholder="CIN">
+                        <input type="text" class="form-control rounded-pill shadow-sm " id="cin" name="cin" required placeholder="CIN">
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-2">
                         <div class="col-md-12">
-                            <h5>Veuillez choisir la date du rendez vous</h5>
+                            <h5><em>Veuillez choisir la date du rendez vous</em></h5>
+
                         </div>
                     </div>
-
-
                     <input type="hidden" name="date" id="date">
                     <input type="hidden" name="time" id="time">
 
@@ -134,7 +130,7 @@
                             @endif
                         </div>
                     </div>
-                    <div class="d-flex justify-content-around w-100 mb-5 ">
+                    <div class="d-flex justify-content-around w-100 mb-2 ">
                         @foreach ($paginator as $appointment)
                             @php
                                 $todayC = now()->format('Y-m-d');
@@ -158,7 +154,7 @@
                         @endforeach
                     </div>
                     <div class="row">
-                        <div class="col-md-12 mb-5">
+                        <div class="col-md-12 mb-2">
                             <h5><em>Veuillez choisir l&apos;heure du rendez vous</h5>
                         </div>
                     </div>
@@ -200,7 +196,7 @@
 
                     $.each(data.data, function(index, value) {
 
-                        html += `  <button class="btn btn-outline-success  mx-2 my-2  "
+                        html += `  <button class="btn   bg-info  mx-2 my-2  "
                           onclick= "dateAndTime('${date}','${value}')"
                           type="button">
                                ${value}

@@ -26,7 +26,7 @@ class AppointmentAdminRequest extends FormRequest
         return [
                 'nom' => 'required|string:',
                 'prenom' => 'required |string',
-                'cin' => 'required|string|size:8 ',
+                'cin' => 'required|string|size:6 ',
                 'dateRdv' => 'required |string',
                 'heureRdv' => 'required|string',
         ];
